@@ -4,7 +4,7 @@ export const privacySections = [
     content: [
       {
         subtitle: "Usage Data",
-        text: "We collect information about how you use Aequitally, including splits created, payment activities, and feature interactions.",
+        text: "We collect information about how you use Aequitally, including tallies created, payment activities, and feature interactions.",
       },
       {
         subtitle: "Device Information",
@@ -17,7 +17,7 @@ export const privacySections = [
     content: [
       {
         subtitle: "Service Provision",
-        text: "To provide, maintain, and improve Aequitally's expense splitting functionality and user experience.",
+        text: "To provide, maintain, and improve Aequitally's expense tallying functionality and user experience.",
       },
       {
         subtitle: "Analytics",

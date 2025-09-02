@@ -17,7 +17,7 @@ export const termsSections = [
     content: [
       {
         subtitle: "What Aequitally Provides",
-        text: "Aequitally is a expense splitting and bill sharing application that helps users track, calculate, and settle shared expenses.",
+        text: "Aequitally is a expense tallying and bill sharing application that helps users track, calculate, and settle shared expenses.",
       },
       {
         subtitle: "Service Availability",
