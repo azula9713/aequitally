@@ -113,7 +113,6 @@ export default function CreateForm({
               className="h-8 w-16 text-center font-semibold border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
               aria-label="Number of participants"
             />
-            <span className="text-sm">participants</span>
           </div>
           <Button
             type="button"
