@@ -22,8 +22,6 @@ export default function Home() {
     isLoaded,
   } = useTipsPreferences();
   const createTally = useMutation(api.tally.createTally);
-  console.log("createTally", createTally);
-
   const showTips = isLoaded && tipsPreferences.showCreateTallyTips;
 
   const [showTipsMobile, setShowTipsMobile] = useState(false);

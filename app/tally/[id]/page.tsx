@@ -102,7 +102,7 @@ export default function Viewtally({
         value={activeTab}
         onValueChange={setActiveTab}
         defaultValue="participants"
-        className="space-y-4 md:space-y-6"
+        className="space-y-2"
       >
         <TabsList className="grid w-full grid-cols-3 sm:w-auto">
           <TabsTrigger value="expenses">
