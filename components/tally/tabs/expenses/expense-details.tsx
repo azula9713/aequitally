@@ -31,7 +31,7 @@ export default function ExpenseDetails({
 		() =>
 			new Intl.NumberFormat(undefined, {
 				style: "currency",
-				currency: "USD",
+				currency: "LKR",
 				maximumFractionDigits: 2,
 			}),
 		[],

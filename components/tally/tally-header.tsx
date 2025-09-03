@@ -62,7 +62,7 @@ export default function TallyHeader({
 						</span>
 						<span className="flex items-center gap-1.5">
 							<span className="text-lg font-semibold text-primary">
-								${totalExpenses.toFixed(2)}
+								{totalExpenses.toFixed(2)}
 							</span>
 						</span>
 					</div>

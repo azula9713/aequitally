@@ -121,7 +121,7 @@ export default function ParticipnatsTab({
 					)}
 				</CardHeader>
 				<CardContent>
-					<ul className="space-y-1">
+					<ul className="space-y-1 divide-y">
 						{filteredParticipants.map((participant) => {
 							const participantExpenses = getParticipantExpenses(
 								participant.userId,
