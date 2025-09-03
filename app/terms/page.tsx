@@ -1,5 +1,3 @@
-import { UrlObject } from "url";
-import LegalContact from "@/components/common/legal-contact";
 import PageHeader from "@/components/common/page-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -33,7 +31,7 @@ export default function Terms() {
 
 								<div className="space-y-6">
 									{section.content.map((item, itemIndex) => (
-										<div key={itemIndex}>
+										<div key={item.subtitle}>
 											<h3 className="font-medium mb-2">{item.subtitle}</h3>
 											<p className="text-muted-foreground leading-relaxed">
 												{item.text}

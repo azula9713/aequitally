@@ -9,7 +9,10 @@ import { shareMethod } from "./tally.schema";
 // -----------------------------
 const EPSILON = 1e-6;
 
-function ensureParticipantExists(tally: Pick<Doc<"tallies">, "participants">, participantId: string) {
+function ensureParticipantExists(
+	tally: Pick<Doc<"tallies">, "participants">,
+	participantId: string,
+) {
 	const exists = tally.participants.some(
 		(p) => String(p.userId) === String(participantId),
 	);
@@ -17,7 +20,7 @@ function ensureParticipantExists(tally: Pick<Doc<"tallies">, "participants">, pa
 		throw new Error(`Participant ${participantId} is not part of this tally`);
 }
 
-function validateExpenseShare(expense:Doc<"tallies">["expenses"][number]) {
+function validateExpenseShare(expense: Doc<"tallies">["expenses"][number]) {
 	const { shareBetween, shareMethod: method, amount } = expense;
 	if (!Array.isArray(shareBetween) || shareBetween.length === 0) {
 		throw new Error("shareBetween must include at least one participant");
@@ -25,7 +28,10 @@ function validateExpenseShare(expense:Doc<"tallies">["expenses"][number]) {
 
 	// Non-negative checks
 	if (!(amount > 0)) throw new Error("Expense amount must be > 0");
-	const numericFields: (keyof Pick<typeof expense, 'tax' | 'tip' | 'serviceFee'>)[] = ["tax", "tip", "serviceFee"];
+	const numericFields: (keyof Pick<
+		typeof expense,
+		"tax" | "tip" | "serviceFee"
+	>)[] = ["tax", "tip", "serviceFee"];
 	numericFields.forEach((k) => {
 		if (expense[k] != null && !(expense[k] >= 0)) {
 			throw new Error(`${k} must be >= 0`);
@@ -71,7 +77,10 @@ function validateExpenseShare(expense:Doc<"tallies">["expenses"][number]) {
 	}
 }
 
-function validateExpenseReferential(expense:Doc<"tallies">["expenses"][number], tally:Pick<Doc<"tallies">, "participants">) {
+function validateExpenseReferential(
+	expense: Doc<"tallies">["expenses"][number],
+	tally: Pick<Doc<"tallies">, "participants">,
+) {
 	// paidBy must be a participant
 	ensureParticipantExists(tally, expense.paidBy);
 	// All shareBetween participantIds must be participants

@@ -1,5 +1,3 @@
-import { UrlObject } from "url";
-import LegalContact from "@/components/common/legal-contact";
 import PageHeader from "@/components/common/page-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -24,8 +22,8 @@ export default function Privacy() {
 			{/* Privacy Sections */}
 			<section className="py-8 px-2">
 				<div className="max-w-4xl mx-auto space-y-8">
-					{privacySections.map((section, sectionIndex) => (
-						<Card key={sectionIndex}>
+					{privacySections.map((section) => (
+						<Card key={section.title}>
 							<CardContent>
 								<h2 className="text-2xl font-medium mb-6 text-primary">
 									{section.title}
@@ -33,7 +31,7 @@ export default function Privacy() {
 
 								<div className="space-y-6">
 									{section.content.map((item, itemIndex) => (
-										<div key={itemIndex}>
+										<div key={item.subtitle}>
 											<h3 className="font-medium mb-2">{item.subtitle}</h3>
 											<p className="text-muted-foreground leading-relaxed">
 												{item.text}

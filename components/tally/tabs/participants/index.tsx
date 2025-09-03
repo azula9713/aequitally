@@ -2,7 +2,7 @@ import { useMutation } from "convex/react";
 import type { FunctionReturnType } from "convex/server";
 import { Ellipsis, EllipsisVertical, Plus, Search, Trash2 } from "lucide-react";
 import { useMemo, useState } from "react";
-
+import { toast } from "sonner";
 import { ParticipantAvatar } from "@/components/common/participant-avatar";
 import DeleteParticipantModal from "@/components/tally/modals/delete-participant/modal";
 import { Button } from "@/components/ui/button";
@@ -27,7 +27,6 @@ import {
 	getParticipantExpenses,
 } from "@/lib/helpers/tally.helper";
 import { cn } from "@/lib/utils";
-import { toast } from "sonner";
 
 type Props = {
 	tally: FunctionReturnType<typeof api.tally.getTally>;
