@@ -1,64 +1,67 @@
-import { defaultTipsPreferences, loadTipsPreferences, saveTipsPreferences, TipsPreferences } from "@/lib/handlers/tips-handler";
+import {
+	defaultTipsPreferences,
+	loadTipsPreferences,
+	saveTipsPreferences,
+	TipsPreferences,
+} from "@/lib/handlers/tips-handler";
 import { useCallback, useEffect, useState } from "react";
 
-
-
 export default function useTipsPreferences() {
-  const [preferences, setPreferences] = useState<TipsPreferences>(
-    defaultTipsPreferences
-  );
-  const [isLoaded, setIsLoaded] = useState(false);
+	const [preferences, setPreferences] = useState<TipsPreferences>(
+		defaultTipsPreferences,
+	);
+	const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    setPreferences(loadTipsPreferences());
-    setIsLoaded(true);
-  }, []);
+	useEffect(() => {
+		setPreferences(loadTipsPreferences());
+		setIsLoaded(true);
+	}, []);
 
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setPreferences(loadTipsPreferences());
-    };
+	useEffect(() => {
+		const handleStorageChange = () => {
+			setPreferences(loadTipsPreferences());
+		};
 
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+		window.addEventListener("storage", handleStorageChange);
+		return () => window.removeEventListener("storage", handleStorageChange);
+	}, []);
 
-  const updatePreferences = useCallback(
-    (updater: (prev: TipsPreferences) => TipsPreferences) => {
-      const newPreferences = updater(preferences);
-      setPreferences(newPreferences);
-      saveTipsPreferences(newPreferences);
+	const updatePreferences = useCallback(
+		(updater: (prev: TipsPreferences) => TipsPreferences) => {
+			const newPreferences = updater(preferences);
+			setPreferences(newPreferences);
+			saveTipsPreferences(newPreferences);
 
-      window.dispatchEvent(new Event("storage"));
-    },
-    [preferences]
-  );
+			window.dispatchEvent(new Event("storage"));
+		},
+		[preferences],
+	);
 
-  const hideTips = useCallback(
-    (tipType: keyof TipsPreferences) => {
-      updatePreferences((prev) => ({
-        ...prev,
-        [tipType]: false
-      }));
-    },
-    [updatePreferences]
-  );
+	const hideTips = useCallback(
+		(tipType: keyof TipsPreferences) => {
+			updatePreferences((prev) => ({
+				...prev,
+				[tipType]: false,
+			}));
+		},
+		[updatePreferences],
+	);
 
-  const showTips = useCallback(
-    (tipType: keyof TipsPreferences) => {
-      updatePreferences((prev) => ({
-        ...prev,
-        [tipType]: true
-      }));
-    },
-    [updatePreferences]
-  );
+	const showTips = useCallback(
+		(tipType: keyof TipsPreferences) => {
+			updatePreferences((prev) => ({
+				...prev,
+				[tipType]: true,
+			}));
+		},
+		[updatePreferences],
+	);
 
-  return {
-    preferences,
-    updatePreferences,
-    hideTips,
-    showTips,
-    isLoaded
-  };
+	return {
+		preferences,
+		updatePreferences,
+		hideTips,
+		showTips,
+		isLoaded,
+	};
 }
