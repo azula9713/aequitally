@@ -85,9 +85,9 @@ export default function Home() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-4 xl:py-12">
-      <div className="space-y-4 xl:space-y-8">
-        <div className="text-center space-y-3 xl:space-y-6">
+    <div className="max-w-5xl mx-auto p-4 2xl:py-12">
+      <div className="space-y-4 2xl:space-y-8">
+        <div className="text-center space-y-3 2xl:space-y-6">
           <div className="flex items-center justify-center space-x-2 mb-2">
             <div className="inline-flex items-center justify-center rounded-full bg-primary/10 text-primary size-12">
               <Plus className="size-6" />

@@ -176,7 +176,7 @@ html {
   scrollbar-gutter: stable;
 
   /* add 2px to the font size on 1280px and above */
-  @media (min-width: 1280px) {
+  @media (min-width: 1536px) {
     font-size: 1.125rem;
   }
 }

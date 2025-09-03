@@ -18,6 +18,7 @@ import {
   computeSettlements,
   getParticipantName,
 } from "@/lib/helpers/tally.helper";
+import ExportCSVButton from "./export-csv-button";
 
 type Props = {
   tally: Doc<"tallies">;
@@ -62,6 +63,11 @@ export default function SettlementsTab({ tally }: Props) {
                   : "Suggested transfers to settle up"}
               </CardDescription>
             </div>
+            <ExportCSVButton
+              tally={tally}
+              transfers={transfers}
+              disabled={transfers.length === 0}
+            />
           </div>
           {transfers.length > 6 && (
             <div className="relative mt-3">
