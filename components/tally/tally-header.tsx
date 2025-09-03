@@ -1,7 +1,8 @@
-import { Download, Edit, Plus, Receipt, Share2, Users } from "lucide-react";
+import { Edit, Plus, Receipt, Share2, Users } from "lucide-react";
 import { useState } from "react";
 import type { Doc } from "@/convex/_generated/dataModel";
 import { useCurrency } from "@/hooks/use-currency";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "../ui/button";
 import EditTallyModal from "./modals/edit-tally/modal";
 
@@ -22,10 +23,46 @@ export default function TallyHeader({
 }: Props) {
 	const [editTallyOpen, setEditTallyOpen] = useState(false);
 	const { formatCurrency } = useCurrency();
+	const toast = useToast();
+
+	const handleShareClick = async (): Promise<void> => {
+		// Check for clipboard API availability
+		if (!navigator.clipboard) {
+			toast.error("Clipboard not supported", {
+				description: "Please copy the URL manually from the address bar",
+			});
+			return;
+		}
+
+		try {
+			await navigator.clipboard.writeText(window.location.href);
+			toast.success("URL copied to clipboard", {
+				description: "Share this link with others to collaborate on the tally",
+			});
+		} catch (error) {
+			// Handle various error scenarios
+			if (error instanceof DOMException) {
+				switch (error.name) {
+					case "NotAllowedError":
+						toast.error("Permission denied", {
+							description: "Please allow clipboard access and try again",
+						});
+						break;
+					default:
+						toast.error("Failed to copy URL", {
+							description: "Please try again or copy the URL manually",
+						});
+				}
+			} else {
+				toast.error("Unexpected error", {
+					description: "Please try copying the URL manually",
+				});
+			}
+		}
+	};
 
 	return (
 		<>
-			{/* Header with tally details */}
 			<div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
 				<div className="min-w-0 flex-1">
 					<div className="flex flex-col md:flex-row items-start md:items-center gap-3 mb-2">
@@ -80,27 +117,27 @@ export default function TallyHeader({
 						<Edit className="size-4" />
 						<span className="hidden sm:inline">Edit Tally</span>
 					</Button>
-					<Button
-						size="sm"
-						onClick={() =>
-							activeTab === "participants"
-								? setOpenAddParticipant(true)
-								: setAddExpenseOpen(true)
-						}
-					>
-						<Plus className="size-4" />
-						<span className="hidden sm:inline">
-							{activeTab === "participants" ? "Add Participant" : "Add Expense"}
-						</span>
-					</Button>
-					<Button variant="outline" size="sm" title="Share Tally">
-						<Share2 className="size-4" />
-					</Button>
-					{tally.expenses.length > 0 && (
-						<Button variant="outline" size="sm" title="Download/Export">
-							<Download className="size-4" />
+					{activeTab === "participants" && (
+						<Button size="sm" onClick={() => setOpenAddParticipant(true)}>
+							<Plus className="size-4" />
+							<span className="hidden sm:inline">Add Participant</span>
 						</Button>
 					)}
+					{activeTab === "expenses" && (
+						<Button size="sm" onClick={() => setAddExpenseOpen(true)}>
+							<Plus className="size-4" />
+							<span className="hidden sm:inline">Add Expense</span>
+						</Button>
+					)}
+					<Button
+						variant="outline"
+						size="sm"
+						title="Share Tally - Copy URL to clipboard"
+						aria-label="Share this tally by copying its URL to clipboard"
+						onClick={handleShareClick}
+					>
+						<Share2 className="size-4" aria-hidden="true" />
+					</Button>
 				</div>
 			</div>
 
