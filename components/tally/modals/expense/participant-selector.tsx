@@ -104,7 +104,7 @@ export function ParticipantSelector({
 										title={p.name}
 									>
 										<ParticipantAvatar
-											participant={p}
+											participantName={p.name}
 											className="h-7 w-7 shadow-sm"
 										/>
 									</div>

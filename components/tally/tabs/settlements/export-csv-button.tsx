@@ -1,9 +1,8 @@
 import { Download, Loader } from "lucide-react";
 import { useState } from "react";
-import { toast } from "sonner";
-
 import { Button } from "@/components/ui/button";
 import type { Doc } from "@/convex/_generated/dataModel";
+import { useToast } from "@/hooks/use-toast";
 import type { SettlementTransfer } from "@/lib/helpers/tally.helper";
 import { csvExportService } from "@/lib/services/csv-export.service";
 
@@ -23,6 +22,7 @@ export default function ExportCSVButton({
 	size = "sm",
 }: ExportCSVButtonProps) {
 	const [isExporting, setIsExporting] = useState(false);
+	const toast = useToast();
 
 	const handleExport = async (): Promise<void> => {
 		if (isExporting || disabled) return;
@@ -39,18 +39,12 @@ export default function ExportCSVButton({
 
 			toast.success("Settlement summary exported successfully", {
 				description: `Downloaded as ${filename}`,
-				classNames: {
-					icon: "text-primary",
-				},
 			});
 		} catch (error) {
 			console.error("Export failed:", error);
 			toast.error("Failed to export settlement summary", {
 				description:
 					error instanceof Error ? error.message : "Unknown error occurred",
-				classNames: {
-					icon: "text-destructive",
-				},
 			});
 		} finally {
 			setIsExporting(false);

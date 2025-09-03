@@ -1,6 +1,5 @@
 import { useMutation } from "convex/react";
 import { useState } from "react";
-import { toast } from "sonner";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -13,6 +12,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { api } from "@/convex/_generated/api";
 import type { Doc } from "@/convex/_generated/dataModel";
+import { useToast } from "@/hooks/use-toast";
 
 type Props = {
 	open: boolean;
@@ -29,6 +29,7 @@ export default function DeleteExpenseModal({
 }: Props) {
 	const removeExpense = useMutation(api.tally.removeExpense);
 	const [submitting, setSubmitting] = useState(false);
+	const toast = useToast();
 
 	const onConfirm = async () => {
 		try {
@@ -40,9 +41,6 @@ export default function DeleteExpenseModal({
 
 			toast.warning("Expense deleted", {
 				description: `${expense.title} has been removed.`,
-				classNames: {
-					icon: "text-yellow-500",
-				},
 			});
 			setOpen(false);
 		} catch (e) {
@@ -50,9 +48,6 @@ export default function DeleteExpenseModal({
 
 			toast.error("Failed to remove expense", {
 				description: e instanceof Error ? e.message : "Please try again.",
-				classNames: {
-					icon: "text-destructive",
-				},
 			});
 		} finally {
 			setSubmitting(false);

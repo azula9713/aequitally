@@ -1,17 +1,16 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { getInitials } from "@/lib/helpers/common.helper";
-import type { Participant } from "@/lib/types/tally";
 
-type ParticipantAvatarProps = { participant: Participant; className?: string };
+type ParticipantAvatarProps = { participantName: string; className?: string };
 
 export function ParticipantAvatar({
-	participant,
+	participantName,
 	className,
 }: ParticipantAvatarProps) {
 	return (
 		<Avatar className={className}>
 			<AvatarFallback className="text-xs bg-muted">
-				{getInitials(participant.name)}
+				{getInitials(participantName)}
 			</AvatarFallback>
 		</Avatar>
 	);

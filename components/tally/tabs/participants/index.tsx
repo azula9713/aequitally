@@ -2,7 +2,6 @@ import { useMutation } from "convex/react";
 import type { FunctionReturnType } from "convex/server";
 import { Ellipsis, EllipsisVertical, Plus, Search, Trash2 } from "lucide-react";
 import { useMemo, useState } from "react";
-import { toast } from "sonner";
 import { ParticipantAvatar } from "@/components/common/participant-avatar";
 import DeleteParticipantModal from "@/components/tally/modals/delete-participant/modal";
 import { Button } from "@/components/ui/button";
@@ -22,6 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { TabsContent } from "@/components/ui/tabs";
 import { api } from "@/convex/_generated/api";
+import { useToast } from "@/hooks/use-toast";
 import {
 	getParticipantBalance,
 	getParticipantExpenses,
@@ -46,6 +46,7 @@ export default function ParticipnatsTab({
 		userId: string;
 		name: string;
 	} | null>(null);
+	const toast = useToast();
 
 	const openDeleteParticipantForParticipant = (p: {
 		userId: string;
@@ -83,16 +84,10 @@ export default function ParticipnatsTab({
 
 			toast.success("Name updated", {
 				description: "Participant name has been updated.",
-				classNames: {
-					icon: "text-primary",
-				},
 			});
 		} catch (e) {
 			toast.error("Failed to update name", {
 				description: e instanceof Error ? e.message : "Please try again.",
-				classNames: {
-					icon: "text-destructive",
-				},
 			});
 		} finally {
 			cancelEditing();
@@ -146,7 +141,9 @@ export default function ParticipnatsTab({
 									className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 py-3"
 								>
 									<div className="flex min-w-0 items-center gap-3">
-										<ParticipantAvatar {...{ participant }} />
+										<ParticipantAvatar
+											{...{ participantName: participant.name }}
+										/>
 										<div className="min-w-0">
 											<div className="truncate font-medium leading-tight">
 												{editingId === participant.userId ? (

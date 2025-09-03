@@ -185,7 +185,7 @@ export default function ExpenseModal({
 												>
 													<div className="flex items-center gap-2">
 														<ParticipantAvatar
-															participant={participant}
+															participantName={participant.name}
 															className="h-5 w-5"
 														/>
 														{participant.name}

@@ -1,6 +1,5 @@
 import { useMutation } from "convex/react";
 import { useMemo, useState } from "react";
-import { toast } from "sonner";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -13,6 +12,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { api } from "@/convex/_generated/api";
 import type { Doc } from "@/convex/_generated/dataModel";
+import { useToast } from "@/hooks/use-toast";
 
 type Props = {
 	open: boolean;
@@ -29,6 +29,7 @@ export default function DeleteParticipantModal({
 }: Props) {
 	const removeParticipant = useMutation(api.tally.removeParticipant);
 	const [submitting, setSubmitting] = useState(false);
+	const toast = useToast();
 
 	const involvedExpenses = useMemo(() => {
 		const pId = String(participant.userId);
@@ -53,18 +54,12 @@ export default function DeleteParticipantModal({
 
 			toast.warning("Participant removed", {
 				description: `${participant.name} has been removed.`,
-				classNames: {
-					icon: "text-yellow-500",
-				},
 			});
 
 			setOpen(false);
 		} catch (e) {
 			toast.error("Failed to remove participant", {
 				description: e instanceof Error ? e.message : "Please try again.",
-				classNames: {
-					icon: "text-destructive",
-				},
 			});
 		} finally {
 			setSubmitting(false);

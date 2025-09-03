@@ -111,12 +111,12 @@ export default function SettlementsTab({ tally }: Props) {
 										<div className="flex items-center gap-3 min-w-0">
 											<div className="flex items-center gap-2">
 												<ParticipantAvatar
-													participant={{ name: fromName }}
+													participantName={fromName}
 													className="size-7"
 												/>
 												<ArrowUpRight className="size-4 text-emerald-600" />
 												<ParticipantAvatar
-													participant={{ name: toName }}
+													participantName={toName}
 													className="size-7"
 												/>
 											</div>
