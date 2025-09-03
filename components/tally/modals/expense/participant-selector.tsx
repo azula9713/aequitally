@@ -1,7 +1,7 @@
 import { ParticipantAvatar } from "@/components/common/participant-avatar";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectTrigger } from "@/components/ui/select";
-import {
+import type {
 	CustomValueHandlers,
 	CustomValuesProps,
 	Participant,

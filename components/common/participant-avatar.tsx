@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { getInitials } from "@/lib/helpers/common.helper";
+
 // import { Participant } from "@/lib/types/tally";
 
 type ParticipantAvatarProps = { participant: any; className?: string };

@@ -1,4 +1,4 @@
-import { TipsPreferences } from "@/lib/handlers/tips-handler";
+import type { TipsPreferences } from "@/lib/handlers/tips-handler";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 

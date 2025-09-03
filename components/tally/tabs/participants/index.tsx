@@ -1,5 +1,5 @@
 import { useMutation } from "convex/react";
-import { FunctionReturnType } from "convex/server";
+import type { FunctionReturnType } from "convex/server";
 import { Ellipsis, EllipsisVertical, Plus, Search, Trash2 } from "lucide-react";
 import { useMemo, useState } from "react";
 

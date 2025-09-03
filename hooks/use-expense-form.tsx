@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 
 import { api } from "@/convex/_generated/api";
-import { Doc } from "@/convex/_generated/dataModel";
+import type { Doc } from "@/convex/_generated/dataModel";
 import { expenseSchema } from "@/lib/schemas/expense.schema";
-import { ExpenseFormValues, ShareMethod } from "@/lib/types/tally";
+import type { ExpenseFormValues, ShareMethod } from "@/lib/types/tally";
 import {
 	expenseToFormValues,
 	getDefaultFormValues,

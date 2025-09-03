@@ -12,11 +12,11 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { TabsContent } from "@/components/ui/tabs";
-import { Doc } from "@/convex/_generated/dataModel";
+import type { Doc } from "@/convex/_generated/dataModel";
 import {
-	SettlementTransfer,
 	computeSettlements,
 	getParticipantName,
+	type SettlementTransfer,
 } from "@/lib/helpers/tally.helper";
 import ExportCSVButton from "./export-csv-button";
 

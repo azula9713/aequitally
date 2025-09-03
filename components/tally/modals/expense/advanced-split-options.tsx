@@ -15,7 +15,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import {
+import type {
 	CustomValuesProps,
 	ShareMethod,
 	ShareMethodProps,

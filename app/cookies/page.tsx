@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
+import { UrlObject } from "url";
 import LegalContact from "@/components/common/legal-contact";
 import PageHeader from "@/components/common/page-header";
 import { Badge } from "@/components/ui/badge";
@@ -14,7 +14,6 @@ import {
 	loadCookiePreferences,
 	saveCookiePreferences,
 } from "@/lib/handlers/cookie-handler";
-import { UrlObject } from "url";
 
 export default function Cookies() {
 	const [essential, setEssential] = useState(true);

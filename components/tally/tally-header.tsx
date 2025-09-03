@@ -1,10 +1,9 @@
 import { Download, Edit, Plus, Receipt, Share2, Users } from "lucide-react";
 import React, { useState } from "react";
-
+import type { Doc } from "@/convex/_generated/dataModel";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import EditTallyModal from "./modals/edit-tally/modal";
-import { Doc } from "@/convex/_generated/dataModel";
 
 type Props = {
 	tally: Doc<"tallies">;

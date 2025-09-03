@@ -18,8 +18,8 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
+import type { Doc } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
-import { Doc } from "@/convex/_generated/dataModel";
 
 type Props = {
 	editTallyOpen: boolean;

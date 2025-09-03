@@ -1,7 +1,6 @@
-import { ReactNode } from "react";
-
-import { ThemeProvider } from "./theme-provider";
+import type { ReactNode } from "react";
 import ConvexClientProvider from "./convex-client-provider";
+import { ThemeProvider } from "./theme-provider";
 
 type Props = {
 	children: ReactNode;

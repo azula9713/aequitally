@@ -1,9 +1,9 @@
 "use client";
 
+import { useQuery } from "convex/react";
 import { Receipt, ReceiptText, Users } from "lucide-react";
 import Link from "next/link";
 import { use, useState } from "react";
-
 import ExpenseModal from "@/components/tally/modals/expense/modal";
 import ParticipantModal from "@/components/tally/modals/participant/modal";
 import ExpensesTab from "@/components/tally/tabs/expenses";
@@ -12,9 +12,8 @@ import SettlementsTab from "@/components/tally/tabs/settlements";
 import TallyHeader from "@/components/tally/tally-header";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
+import type { Id } from "@/convex/_generated/dataModel";
 
 export default function Viewtally({
 	params,

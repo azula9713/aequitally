@@ -1,10 +1,10 @@
+import { useCallback, useEffect, useState } from "react";
 import {
 	defaultTipsPreferences,
 	loadTipsPreferences,
 	saveTipsPreferences,
-	TipsPreferences,
+	type TipsPreferences,
 } from "@/lib/handlers/tips-handler";
-import { useCallback, useEffect, useState } from "react";
 
 export default function useTipsPreferences() {
 	const [preferences, setPreferences] = useState<TipsPreferences>(

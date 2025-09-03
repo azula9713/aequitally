@@ -1,18 +1,18 @@
 "use client";
 
+import { useMutation } from "convex/react";
+import { FileText, Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import CreateForm from "@/components/home/create-form";
 import MobileTips from "@/components/home/mobile-tips";
 import QuickTips from "@/components/home/quick-tips";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { api } from "@/convex/_generated/api";
 import useTipsPreferences from "@/hooks/use-tips-preference";
-import { Participant } from "@/lib/types/tally";
+import type { Participant } from "@/lib/types/tally";
 import { cn } from "@/lib/utils";
-import { useMutation } from "convex/react";
-import { FileText, Plus } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 export default function Home() {
 	const router = useRouter();

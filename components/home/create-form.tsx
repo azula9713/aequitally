@@ -7,7 +7,7 @@ import {
 	Plus,
 	Users,
 } from "lucide-react";
-import { FormEvent, useState } from "react";
+import { type FormEvent, useState } from "react";
 
 import { cn } from "@/lib/utils";
 

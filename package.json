@@ -6,7 +6,9 @@
 		"dev": "next dev --turbopack",
 		"build": "next build --turbopack",
 		"start": "next start",
-		"lint:fix": "pnpm exec biome format --write"
+		"lint:fix": "pnpm exec biome lint --write",
+		"format": "pnpm exec biome format --write",
+		"format:fix": "pnpm exec biome check --write"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^5.2.1",

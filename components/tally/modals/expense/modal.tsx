@@ -33,12 +33,11 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import type { Doc } from "@/convex/_generated/dataModel";
 // import { Doc } from "@/convex/_generated/dataModel";
 import { useExpenseForm } from "@/hooks/use-expense-form";
 import { cn } from "@/lib/utils";
-
 import { AdvancedSplitOptions, ParticipantSelector } from "./index";
-import { Doc } from "@/convex/_generated/dataModel";
 
 type Props = {
 	addExpenseOpen: boolean;

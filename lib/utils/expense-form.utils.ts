@@ -1,6 +1,6 @@
-import { Doc } from "@/convex/_generated/dataModel";
+import type { Doc } from "@/convex/_generated/dataModel";
 
-import { ExpenseFormValues } from "../types/tally";
+import type { ExpenseFormValues } from "../types/tally";
 
 export function expenseToFormValues(
 	expense: Doc<"tallies">["expenses"][number],

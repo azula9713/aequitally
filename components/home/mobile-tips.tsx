@@ -1,6 +1,6 @@
 import { ChevronDown } from "lucide-react";
 
-import { TipsPreferences } from "@/lib/handlers/tips-handler";
+import type { TipsPreferences } from "@/lib/handlers/tips-handler";
 import { Checkbox } from "../ui/checkbox";
 
 import TipContent from "./tip-content";

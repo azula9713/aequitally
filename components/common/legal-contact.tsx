@@ -1,7 +1,6 @@
+import type { UrlObject } from "node:url";
 import Link from "next/link";
-
 import { Button } from "../ui/button";
-import { UrlObject } from "url";
 
 type Props = {
 	primaryLink?: UrlObject;

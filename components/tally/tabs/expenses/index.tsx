@@ -12,16 +12,14 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { TabsContent } from "@/components/ui/tabs";
-import { Doc } from "@/convex/_generated/dataModel";
+import type { Doc } from "@/convex/_generated/dataModel";
 import { getParticipantName } from "@/lib/helpers/tally.helper";
-
+import DeleteExpenseModal from "../../modals/delete-expense/modal";
+import EditExpenseConfirmationModal from "../../modals/edit-expense-confirmation/modal";
 import ExpenseModal from "../../modals/expense/modal";
-
 import ExpenseDetails from "./expense-details";
 import SearchExpenses from "./search-expenses";
 import SortExpenses from "./sort-expenses";
-import DeleteExpenseModal from "../../modals/delete-expense/modal";
-import EditExpenseConfirmationModal from "../../modals/edit-expense-confirmation/modal";
 
 type Props = {
 	tally: Doc<"tallies">;

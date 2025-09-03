@@ -1,7 +1,7 @@
-import { FunctionReturnType } from "convex/server";
+import type { FunctionReturnType } from "convex/server";
 
-import { api } from "@/convex/_generated/api";
-import { Doc } from "@/convex/_generated/dataModel";
+import type { api } from "@/convex/_generated/api";
+import type { Doc } from "@/convex/_generated/dataModel";
 
 export const getParticipantName = (
 	id: string,

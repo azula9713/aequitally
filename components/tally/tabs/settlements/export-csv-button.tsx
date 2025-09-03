@@ -3,8 +3,8 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import { Doc } from "@/convex/_generated/dataModel";
-import { SettlementTransfer } from "@/lib/helpers/tally.helper";
+import type { Doc } from "@/convex/_generated/dataModel";
+import type { SettlementTransfer } from "@/lib/helpers/tally.helper";
 import { csvExportService } from "@/lib/services/csv-export.service";
 
 interface ExportCSVButtonProps {

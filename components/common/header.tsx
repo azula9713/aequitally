@@ -1,11 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-
 import { Button } from "../ui/button";
 import { ThemeToggle } from "./theme-toggle";
-import Image from "next/image";
 
 export default function Header() {
 	const router = useRouter();

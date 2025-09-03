@@ -1,9 +1,9 @@
+import { UrlObject } from "url";
 import LegalContact from "@/components/common/legal-contact";
 import PageHeader from "@/components/common/page-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { termsSections } from "@/lib/data/terms-data";
-import { UrlObject } from "url";
 
 export default function Terms() {
 	return (

@@ -12,7 +12,8 @@ import {
 	AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { api } from "@/convex/_generated/api";
-import { Doc } from "@/convex/_generated/dataModel";
+import type { Doc } from "@/convex/_generated/dataModel";
+
 // import { useToast } from "@/hooks/use-toast";
 
 type Props = {

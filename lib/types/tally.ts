@@ -1,6 +1,6 @@
-import * as v from "valibot";
+import type * as v from "valibot";
 
-import { expenseSchema } from "../schemas/expense.schema";
+import type { expenseSchema } from "../schemas/expense.schema";
 
 export interface Participant {
 	userId: string;

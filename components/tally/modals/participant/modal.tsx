@@ -13,8 +13,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { api } from "@/convex/_generated/api";
-import { Doc } from "@/convex/_generated/dataModel";
-import { Participant } from "@/lib/types/tally";
+import type { Doc } from "@/convex/_generated/dataModel";
+import type { Participant } from "@/lib/types/tally";
 
 type Props = {
 	openAddParticipant: boolean;
