@@ -13,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { TabsContent } from "@/components/ui/tabs";
 import type { Doc } from "@/convex/_generated/dataModel";
+import { useCurrency } from "@/hooks/use-currency";
 import {
 	computeSettlements,
 	getParticipantName,
@@ -26,6 +27,7 @@ type Props = {
 
 export default function SettlementsTab({ tally }: Props) {
 	const [searchTerm, setSearchTerm] = useState("");
+	const { formatCurrency } = useCurrency();
 
 	const transfers = useMemo<SettlementTransfer[]>(() => {
 		return computeSettlements(tally);
@@ -59,7 +61,7 @@ export default function SettlementsTab({ tally }: Props) {
 								{visibleTransfers.length > 0
 									? `${
 											visibleTransfers.length
-										} transfers • ${totalToSettle.toFixed(2)} total`
+										} transfers • ${formatCurrency(totalToSettle)} total`
 									: "Suggested transfers to settle up"}
 							</CardDescription>
 						</div>
@@ -130,7 +132,7 @@ export default function SettlementsTab({ tally }: Props) {
 											</div>
 										</div>
 										<Badge className="bg-emerald-600/10 text-emerald-700 dark:text-emerald-400">
-											{t.amount.toFixed(2)}
+											{formatCurrency(t.amount)}
 										</Badge>
 									</li>
 								);

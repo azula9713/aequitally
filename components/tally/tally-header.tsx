@@ -1,6 +1,7 @@
 import { Download, Edit, Plus, Receipt, Share2, Users } from "lucide-react";
 import { useState } from "react";
 import type { Doc } from "@/convex/_generated/dataModel";
+import { useCurrency } from "@/hooks/use-currency";
 import { Button } from "../ui/button";
 import EditTallyModal from "./modals/edit-tally/modal";
 
@@ -20,6 +21,7 @@ export default function TallyHeader({
 	activeTab,
 }: Props) {
 	const [editTallyOpen, setEditTallyOpen] = useState(false);
+	const { formatCurrency } = useCurrency();
 
 	return (
 		<>
@@ -62,7 +64,7 @@ export default function TallyHeader({
 						</span>
 						<span className="flex items-center gap-1.5">
 							<span className="text-lg font-semibold text-primary">
-								{totalExpenses.toFixed(2)}
+								{formatCurrency(totalExpenses)}
 							</span>
 						</span>
 					</div>

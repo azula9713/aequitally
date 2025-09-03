@@ -15,6 +15,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useCurrency } from "@/hooks/use-currency";
 import type {
 	CustomValuesProps,
 	ShareMethod,
@@ -39,6 +40,7 @@ export function AdvancedSplitOptions({
 	customPercentages,
 	customAmounts,
 }: Props & ShareMethodProps & CustomValuesProps) {
+	const { formatCurrency } = useCurrency();
 	const computeSharesTotal = () => {
 		return selectedParticipants.reduce(
 			(sum, id) => sum + (customShares[id] || 0),
@@ -188,7 +190,7 @@ export function AdvancedSplitOptions({
 								)}
 								{shareMethod === "exact-amounts" && (
 									<span>
-										Total ${(computeCustomTotalCents() / 100).toFixed(2)}
+										Total {formatCurrency(computeCustomTotalCents() / 100)}
 									</span>
 								)}
 							</div>

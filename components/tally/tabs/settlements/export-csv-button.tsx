@@ -2,6 +2,7 @@ import { Download, Loader } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import type { Doc } from "@/convex/_generated/dataModel";
+import { useCurrency } from "@/hooks/use-currency";
 import { useToast } from "@/hooks/use-toast";
 import type { SettlementTransfer } from "@/lib/helpers/tally.helper";
 import { csvExportService } from "@/lib/services/csv-export.service";
@@ -23,6 +24,7 @@ export default function ExportCSVButton({
 }: ExportCSVButtonProps) {
 	const [isExporting, setIsExporting] = useState(false);
 	const toast = useToast();
+	const { currencyFormatter } = useCurrency();
 
 	const handleExport = async (): Promise<void> => {
 		if (isExporting || disabled) return;
@@ -33,6 +35,7 @@ export default function ExportCSVButton({
 			const csvContent = csvExportService.generateSettlementCSV(
 				tally,
 				transfers,
+				currencyFormatter,
 			);
 			const filename = csvExportService.generateFilename(tally);
 			csvExportService.downloadCSV(csvContent, filename);

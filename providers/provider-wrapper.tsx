@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import ConvexClientProvider from "./convex-client-provider";
+import { CurrencyProvider } from "./currency-provider";
 import { ThemeProvider } from "./theme-provider";
 
 type Props = {
@@ -15,7 +16,7 @@ export default function ProviderWrapper({ children }: Props) {
 				enableSystem
 				disableTransitionOnChange
 			>
-				{children}
+				<CurrencyProvider>{children}</CurrencyProvider>
 			</ThemeProvider>
 		</ConvexClientProvider>
 	);

@@ -36,6 +36,18 @@ export interface ProcessedSettlementData {
 
 export class SettlementCSVExportService {
 	/**
+	 * Currency formatter to use for formatting amounts in CSV
+	 */
+	private currencyFormatter?: Intl.NumberFormat;
+
+	/**
+	 * Sets the currency formatter for the service
+	 */
+	public setCurrencyFormatter(formatter: Intl.NumberFormat): void {
+		this.currencyFormatter = formatter;
+	}
+
+	/**
 	 * Escapes CSV field content to handle commas, quotes, and newlines
 	 */
 	private escapeCSVField(field: string): string {
@@ -46,9 +58,19 @@ export class SettlementCSVExportService {
 	}
 
 	/**
-	 * Formats currency values for CSV export
+	 * Formats currency values for CSV export using the set currency formatter
 	 */
 	private formatCurrencyForCSV(amount: number): string {
+		if (this.currencyFormatter) {
+			// Remove currency symbol and formatting for CSV
+			const formatted = this.currencyFormatter.format(amount);
+			// Extract numeric value from formatted currency
+			const numericMatch = formatted.match(/([\d,]+\.?\d*)/);
+			if (numericMatch) {
+				return numericMatch[1].replace(/,/g, "");
+			}
+		}
+		// Fallback to 2 decimal places
 		return amount.toFixed(2);
 	}
 
@@ -204,11 +226,20 @@ export class SettlementCSVExportService {
 
 	/**
 	 * Generates complete CSV content for settlement data
+	 * @param tally The tally data
+	 * @param transfers The settlement transfers
+	 * @param currencyFormatter Optional currency formatter to use
 	 */
 	public generateSettlementCSV(
 		tally: Doc<"tallies">,
 		transfers: SettlementTransfer[],
+		currencyFormatter?: Intl.NumberFormat,
 	): string {
+		// Set the currency formatter if provided
+		if (currencyFormatter) {
+			this.setCurrencyFormatter(currencyFormatter);
+		}
+
 		const data = this.processSettlementData(tally, transfers);
 
 		const csvSections = [

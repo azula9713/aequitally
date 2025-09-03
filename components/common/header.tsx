@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "../ui/button";
+import CurrencyPicker from "./currency-picker";
 import { ThemeToggle } from "./theme-toggle";
 
 export default function Header() {
@@ -32,6 +33,7 @@ export default function Header() {
 					</div>
 
 					<div className="flex items-center space-x-4">
+						<CurrencyPicker />
 						<ThemeToggle />
 						{pathname !== "/" && (
 							<Button

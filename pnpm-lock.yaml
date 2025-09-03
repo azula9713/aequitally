@@ -62,6 +62,9 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
+      global-currency-list:
+        specifier: ^0.0.2
+        version: 0.0.2
       lucide-react:
         specifier: ^0.542.0
         version: 0.542.0(react@19.1.0)
@@ -1314,6 +1317,9 @@ packages:
   get-nonce@1.0.1:
     resolution: {integrity: sha512-FJhYRoDaiatfEkUK8HKlicmu/3SGFD51q3itKDGoSTysQJBnfOcxU5GxnhE1E6soB76MbT0MBtnKJuXyAx+96Q==}
     engines: {node: '>=6'}
+
+  global-currency-list@0.0.2:
+    resolution: {integrity: sha512-qHuQNyv7P4BWKQmKAIpfDXRy0a14483rrt/Tb0d7UNiP6UQnJ8DSl5mcf8fzxbkPXyq2eAddDcsaLVu7mYhodQ==}
 
   globals@14.0.0:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
@@ -2800,6 +2806,8 @@ snapshots:
   get-east-asian-width@1.3.1: {}
 
   get-nonce@1.0.1: {}
+
+  global-currency-list@0.0.2: {}
 
   globals@14.0.0: {}
 

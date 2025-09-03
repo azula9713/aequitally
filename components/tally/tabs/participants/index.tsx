@@ -21,6 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { TabsContent } from "@/components/ui/tabs";
 import { api } from "@/convex/_generated/api";
+import { useCurrency } from "@/hooks/use-currency";
 import { useToast } from "@/hooks/use-toast";
 import {
 	getParticipantBalance,
@@ -47,6 +48,7 @@ export default function ParticipnatsTab({
 		name: string;
 	} | null>(null);
 	const toast = useToast();
+	const { formatCurrency } = useCurrency();
 
 	const openDeleteParticipantForParticipant = (p: {
 		userId: string;
@@ -172,7 +174,7 @@ export default function ParticipnatsTab({
 												)}
 											</div>
 											<div className="truncate text-xs text-muted-foreground">
-												Paid {totalPaid.toFixed(2)} •{" "}
+												Paid {formatCurrency(totalPaid)} •{" "}
 												{participantExpenses.length} expenses
 											</div>
 										</div>
@@ -194,8 +196,8 @@ export default function ParticipnatsTab({
 											{Math.abs(balance) <= 0.01
 												? "Settled"
 												: positive
-													? `+${balance.toFixed(2)}`
-													: `-${Math.abs(balance).toFixed(2)}`}
+													? `+${formatCurrency(balance)}`
+													: `-${formatCurrency(Math.abs(balance))}`}
 										</span>
 										<DropdownMenu>
 											<DropdownMenuTrigger asChild>

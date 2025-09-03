@@ -1,5 +1,4 @@
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
-import { useMemo } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -9,6 +8,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { Doc } from "@/convex/_generated/dataModel";
+import { useCurrency } from "@/hooks/use-currency";
 
 type Props = {
 	expense: Doc<"tallies">["expenses"][number];
@@ -27,15 +27,7 @@ export default function ExpenseDetails({
 	openEditExpense,
 	openDeleteExpense,
 }: Props) {
-	const currencyFmt = useMemo(
-		() =>
-			new Intl.NumberFormat(undefined, {
-				style: "currency",
-				currency: "LKR",
-				maximumFractionDigits: 2,
-			}),
-		[],
-	);
+	const { formatCurrency } = useCurrency();
 
 	return (
 		<div
@@ -51,7 +43,7 @@ export default function ExpenseDetails({
 							<>
 								<span className="sr-only">Per head</span>
 								<span className="text-xs text-muted-foreground">
-									{currencyFmt.format(perHead)} each
+									{formatCurrency(perHead)} each
 								</span>
 							</>
 						) : (
@@ -67,7 +59,7 @@ export default function ExpenseDetails({
 				<div className="flex items-center justify-between w-full md:w-auto gap-2">
 					<div className="text-right">
 						<div className="text-sm font-semibold tabular-nums">
-							{currencyFmt.format(expense.amount)}
+							{formatCurrency(expense.amount)}
 						</div>
 					</div>
 					<DropdownMenu>
