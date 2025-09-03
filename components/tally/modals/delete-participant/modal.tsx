@@ -53,12 +53,18 @@ export default function DeleteParticipantModal({
 
 			toast.warning("Participant removed", {
 				description: `${participant.name} has been removed.`,
+				classNames: {
+					icon: "text-yellow-500",
+				},
 			});
 
 			setOpen(false);
 		} catch (e) {
 			toast.error("Failed to remove participant", {
 				description: e instanceof Error ? e.message : "Please try again.",
+				classNames: {
+					icon: "text-destructive",
+				},
 			});
 		} finally {
 			setSubmitting(false);

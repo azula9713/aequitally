@@ -40,6 +40,9 @@ export default function DeleteExpenseModal({
 
 			toast.warning("Expense deleted", {
 				description: `${expense.title} has been removed.`,
+				classNames: {
+					icon: "text-yellow-500",
+				},
 			});
 			setOpen(false);
 		} catch (e) {
@@ -47,6 +50,9 @@ export default function DeleteExpenseModal({
 
 			toast.error("Failed to remove expense", {
 				description: e instanceof Error ? e.message : "Please try again.",
+				classNames: {
+					icon: "text-destructive",
+				},
 			});
 		} finally {
 			setSubmitting(false);

@@ -83,10 +83,16 @@ export default function ParticipnatsTab({
 
 			toast.success("Name updated", {
 				description: "Participant name has been updated.",
+				classNames: {
+					icon: "text-primary",
+				},
 			});
 		} catch (e) {
 			toast.error("Failed to update name", {
 				description: e instanceof Error ? e.message : "Please try again.",
+				classNames: {
+					icon: "text-destructive",
+				},
 			});
 		} finally {
 			cancelEditing();
@@ -161,7 +167,7 @@ export default function ParticipnatsTab({
 													<button
 														type="button"
 														onClick={() => startEditing(participant)}
-														className="truncate text-left hover:underline decoration-dotted"
+														className="truncate text-left hover:underline decoration-dotted cursor-text"
 														title="Click to edit name"
 													>
 														{participant.name}

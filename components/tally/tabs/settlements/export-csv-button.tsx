@@ -39,12 +39,18 @@ export default function ExportCSVButton({
 
 			toast.success("Settlement summary exported successfully", {
 				description: `Downloaded as ${filename}`,
+				classNames: {
+					icon: "text-primary",
+				},
 			});
 		} catch (error) {
 			console.error("Export failed:", error);
 			toast.error("Failed to export settlement summary", {
 				description:
 					error instanceof Error ? error.message : "Unknown error occurred",
+				classNames: {
+					icon: "text-destructive",
+				},
 			});
 		} finally {
 			setIsExporting(false);
