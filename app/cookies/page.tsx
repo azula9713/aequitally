@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { UrlObject } from "url";
-import LegalContact from "@/components/common/legal-contact";
 import PageHeader from "@/components/common/page-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -148,7 +146,7 @@ export default function Cookies() {
 								<div>
 									<h4 className="font-medium mb-3">Examples:</h4>
 									<ul className="space-y-2">
-										{type.examples.map((example, exampleIndex) => (
+										{type.examples.map((example) => (
 											<li key={example} className="flex items-center space-x-2">
 												<span className="text-primary">•</span>
 												<span className="text-muted-foreground text-sm">

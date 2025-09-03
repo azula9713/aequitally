@@ -1,7 +1,7 @@
+import { useId } from "react";
 import type { TipsPreferences } from "@/lib/handlers/tips-handler";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
-
 import TipContent from "./tip-content";
 
 type Props = {
@@ -13,6 +13,8 @@ export default function QuickTips({
 	tipsPreferences,
 	handleDontShowAgainChange,
 }: Props) {
+	const dontShowTipsId = useId();
+
 	return (
 		<aside className="hidden md:block md:col-span-4">
 			<div className="sticky top-4 bg-muted/30 rounded-lg p-4 border border-border/30">
@@ -23,12 +25,12 @@ export default function QuickTips({
 				<TipContent />
 				<div className="flex items-center space-x-2 mt-3 pt-2 border-t border-border/30">
 					<Checkbox
-						id="dont-show-tips"
+						id={dontShowTipsId}
 						checked={!tipsPreferences.showCreateTallyTips}
 						onCheckedChange={handleDontShowAgainChange}
 					/>
 					<Label
-						htmlFor="dont-show-tips"
+						htmlFor={dontShowTipsId}
 						className="text-xs text-muted-foreground cursor-pointer"
 					>
 						Don&apos;t show these tips again

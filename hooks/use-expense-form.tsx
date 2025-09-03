@@ -32,7 +32,6 @@ type Args = {
 
 export function useExpenseForm({
 	tally,
-	userId,
 	defaultPaidBy,
 	addExpenseOpen,
 	setAddExpenseOpen,
@@ -82,6 +81,7 @@ export function useExpenseForm({
 		expense,
 		defaultPaidUserId,
 		allParticipantIds,
+		form.reset,
 	]);
 
 	// Keep defaults in sync when opening for new expenses
@@ -103,6 +103,8 @@ export function useExpenseForm({
 		defaultPaidBy,
 		defaultPaidUserId,
 		allParticipantIds,
+		form.setValue,
+		form.getValues,
 	]);
 
 	const selectedParticipants = form.watch("selectedParticipants");
@@ -258,7 +260,7 @@ export function useExpenseForm({
 		);
 		form.reset(defaultValues);
 		setShowAdvanced(false);
-	}, [defaultPaidUserId, allParticipantIds]);
+	}, [defaultPaidUserId, allParticipantIds, form.reset]);
 
 	const onSubmit = form.handleSubmit(async (values) => {
 		const tags = (values.tags || "")
@@ -290,7 +292,7 @@ export function useExpenseForm({
 			await editExpenseMutation({
 				tallyId: tally._id,
 				expenseId: expense.id,
-				updatedExpense: expenseData as any,
+				updatedExpense: expenseData,
 			});
 		} else {
 			const payload = {

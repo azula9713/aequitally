@@ -88,12 +88,11 @@ export function ParticipantSelector({
 				</Select>
 				{selectedParticipants.length > 0 && (
 					<div className="flex items-center gap-2 min-w-0 max-w-full">
-						<div
-							className="flex -space-x-2"
-							aria-label={`${selectedParticipants.length} participant${
-								selectedParticipants.length === 1 ? "" : "s"
-							} selected`}
-						>
+						<div className="flex -space-x-2">
+							<span className="sr-only">
+								{selectedParticipants.length} participant
+								{selectedParticipants.length === 1 ? "" : "s"} selected
+							</span>
 							{participants
 								.filter((p) => selectedParticipants.includes(p.userId))
 								.slice(0, 5)

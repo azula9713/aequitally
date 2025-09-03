@@ -67,8 +67,11 @@ export default function Home() {
 		setIsCreating(true);
 		try {
 			// Clamp participants between 2 and 20 for safety
-			const parsed = parseInt(numParticipants);
-			const numParts = Math.min(20, Math.max(2, isNaN(parsed) ? 2 : parsed));
+			const parsed = parseInt(numParticipants, 10);
+			const numParts = Math.min(
+				20,
+				Math.max(2, Number.isNaN(parsed) ? 2 : parsed),
+			);
 			const participants = createParticipants(numParts);
 			const tallyObject = buildTallyObject(participants);
 

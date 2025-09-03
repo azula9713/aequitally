@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import { useState } from "react";
+import { useId, useState } from "react";
 
 import { ParticipantAvatar } from "@/components/common/participant-avatar";
 import { Button } from "@/components/ui/button";
@@ -58,6 +58,10 @@ export default function ExpenseModal({
 	defaultPaidBy,
 	expense = null,
 }: Props) {
+	const formId = useId();
+	const expenseDateId = useId();
+	const tallyDateId = useId();
+
 	const [datePickerOpen, setDatePickerOpen] = useState(false);
 
 	const {
@@ -110,7 +114,7 @@ export default function ExpenseModal({
 				</div>
 				<Form {...form}>
 					<form
-						id="expense-form"
+						id={formId}
 						onSubmit={onSubmit}
 						className="flex-1 overflow-y-auto overflow-x-hidden px-4 md:px-6 py-4 space-y-6 min-w-0"
 					>
@@ -230,7 +234,7 @@ export default function ExpenseModal({
 											>
 												<PopoverTrigger asChild>
 													<Button
-														id="expense-date"
+														id={expenseDateId}
 														variant="outline"
 														className={cn(
 															"w-full h-9 justify-start text-left font-normal bg-transparent hover:bg-accent hover:text-accent-foreground",
@@ -245,7 +249,7 @@ export default function ExpenseModal({
 												</PopoverTrigger>
 												<PopoverContent className="w-auto p-0">
 													<Calendar
-														id="tally-date-picker"
+														id={tallyDateId}
 														mode="single"
 														selected={expenseDate}
 														onSelect={(selectedDate) => {
@@ -471,7 +475,7 @@ export default function ExpenseModal({
 					</Button>
 					<Button
 						type="submit"
-						form="expense-form"
+						form={formId}
 						disabled={isSubmitDisabled}
 						className="w-full sm:flex-1"
 					>

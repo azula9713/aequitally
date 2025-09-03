@@ -9,15 +9,15 @@ import { shareMethod } from "./tally.schema";
 // -----------------------------
 const EPSILON = 1e-6;
 
-function ensureParticipantExists(tally: Doc<"tallies">, participantId: string) {
+function ensureParticipantExists(tally: Pick<Doc<"tallies">, "participants">, participantId: string) {
 	const exists = tally.participants.some(
-		(p: any) => String(p.userId) === String(participantId),
+		(p) => String(p.userId) === String(participantId),
 	);
 	if (!exists)
 		throw new Error(`Participant ${participantId} is not part of this tally`);
 }
 
-function validateExpenseShare(expense: any) {
+function validateExpenseShare(expense:Doc<"tallies">["expenses"][number]) {
 	const { shareBetween, shareMethod: method, amount } = expense;
 	if (!Array.isArray(shareBetween) || shareBetween.length === 0) {
 		throw new Error("shareBetween must include at least one participant");
@@ -25,7 +25,8 @@ function validateExpenseShare(expense: any) {
 
 	// Non-negative checks
 	if (!(amount > 0)) throw new Error("Expense amount must be > 0");
-	["tax", "tip", "serviceFee"].forEach((k) => {
+	const numericFields: (keyof Pick<typeof expense, 'tax' | 'tip' | 'serviceFee'>)[] = ["tax", "tip", "serviceFee"];
+	numericFields.forEach((k) => {
 		if (expense[k] != null && !(expense[k] >= 0)) {
 			throw new Error(`${k} must be >= 0`);
 		}
@@ -33,36 +34,36 @@ function validateExpenseShare(expense: any) {
 
 	if (method === "exact-amounts") {
 		const total = shareBetween.reduce(
-			(acc: number, s: any) => acc + (s.amount || 0),
+			(acc: number, s) => acc + (s.amount || 0),
 			0,
 		);
 		if (Math.abs(total - amount) > EPSILON) {
 			throw new Error("Sum of exact amounts must equal the expense amount");
 		}
-		shareBetween.forEach((s: any) => {
+		shareBetween.forEach((s) => {
 			if (!(s.amount >= 0)) throw new Error("Exact amounts must be >= 0");
 		});
 	} else if (method === "shares") {
 		const totalShares = shareBetween.reduce(
-			(acc: number, s: any) => acc + (s.shares || 0),
+			(acc: number, s) => acc + (s.shares || 0),
 			0,
 		);
 		if (!(totalShares > 0))
 			throw new Error("Total shares must be > 0 for shares method");
-		shareBetween.forEach((s: any) => {
+		shareBetween.forEach((s) => {
 			if (s.shares != null && !(s.shares >= 0)) {
 				throw new Error("Shares must be >= 0");
 			}
 		});
 	} else if (method === "percentage") {
 		const totalPct = shareBetween.reduce(
-			(acc: number, s: any) => acc + (s.percentage || 0),
+			(acc: number, s) => acc + (s.percentage || 0),
 			0,
 		);
 		if (Math.abs(totalPct - 100) > EPSILON) {
 			throw new Error("Sum of percentages must equal 100");
 		}
-		shareBetween.forEach((s: any) => {
+		shareBetween.forEach((s) => {
 			if (s.percentage != null && (s.percentage < 0 || s.percentage > 100)) {
 				throw new Error("Percentages must be between 0 and 100");
 			}
@@ -70,7 +71,7 @@ function validateExpenseShare(expense: any) {
 	}
 }
 
-function validateExpenseReferential(expense: any, tally: any) {
+function validateExpenseReferential(expense:Doc<"tallies">["expenses"][number], tally:Pick<Doc<"tallies">, "participants">) {
 	// paidBy must be a participant
 	ensureParticipantExists(tally, expense.paidBy);
 	// All shareBetween participantIds must be participants
@@ -218,9 +219,6 @@ export const updateTally = mutation({
 				validateExpenseShare(exp);
 			}
 		}
-
-		// Handle status transitions
-		const now = Date.now();
 
 		const updatedTally = {
 			...tally,

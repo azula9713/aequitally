@@ -1,4 +1,5 @@
 import { ChevronDown } from "lucide-react";
+import { useId } from "react";
 
 import type { TipsPreferences } from "@/lib/handlers/tips-handler";
 import { Checkbox } from "../ui/checkbox";
@@ -18,6 +19,8 @@ export default function MobileTips({
 	tipsPreferences,
 	handleDontShowAgainChange,
 }: Props) {
+	const checkboxId = useId();
+
 	return (
 		<div className="md:hidden">
 			<button
@@ -39,12 +42,12 @@ export default function MobileTips({
 					<TipContent />
 					<div className="flex items-center space-x-2 mt-3 pt-2 border-t border-border/30">
 						<Checkbox
-							id="dont-show-tips"
+							id={checkboxId}
 							checked={!tipsPreferences.showCreateTallyTips}
 							onCheckedChange={handleDontShowAgainChange}
 						/>
 						<label
-							htmlFor="dont-show-tips"
+							htmlFor={checkboxId}
 							className="text-xs text-muted-foreground cursor-pointer"
 						>
 							Don&apos;t show these tips again

@@ -30,19 +30,13 @@ export default function ExportCSVButton({
 		setIsExporting(true);
 
 		try {
-			// Generate CSV content
 			const csvContent = csvExportService.generateSettlementCSV(
 				tally,
 				transfers,
 			);
-
-			// Generate filename
 			const filename = csvExportService.generateFilename(tally);
-
-			// Trigger download
 			csvExportService.downloadCSV(csvContent, filename);
 
-			// Show success message
 			toast.success("Settlement summary exported successfully", {
 				description: `Downloaded as ${filename}`,
 			});

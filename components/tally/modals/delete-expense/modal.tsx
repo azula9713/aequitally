@@ -13,8 +13,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { api } from "@/convex/_generated/api";
 import type { Doc } from "@/convex/_generated/dataModel";
-
-// import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 
 type Props = {
 	open: boolean;
@@ -31,28 +30,25 @@ export default function DeleteExpenseModal({
 }: Props) {
 	const removeExpense = useMutation(api.tally.removeExpense);
 	const [submitting, setSubmitting] = useState(false);
-	//   const { toast } = useToast();
 
 	const onConfirm = async () => {
 		try {
 			setSubmitting(true);
 			await removeExpense({
-				tallyId: (tally as any)._id,
+				tallyId: tally._id,
 				expenseId: expense.id,
 			});
-			//   toast({
-			//     title: "Expense deleted",
-			//     description: `${expense.title} has been removed.`,
-			//     variant: "destructive"
-			//   });
+
+			toast.warning("Expense deleted", {
+				description: `${expense.title} has been removed.`,
+			});
 			setOpen(false);
 		} catch (e) {
 			console.error("Failed to remove expense", e);
-			//   toast({
-			//     title: "Failed to remove expense",
-			//     description: e instanceof Error ? e.message : "Please try again.",
-			//     variant: "destructive"
-			//   });
+
+			toast.error("Failed to remove expense", {
+				description: e instanceof Error ? e.message : "Please try again.",
+			});
 		} finally {
 			setSubmitting(false);
 		}

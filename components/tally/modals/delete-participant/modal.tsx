@@ -13,8 +13,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { api } from "@/convex/_generated/api";
 import type { Doc } from "@/convex/_generated/dataModel";
-
-// import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 
 type Props = {
 	open: boolean;
@@ -31,7 +30,6 @@ export default function DeleteParticipantModal({
 }: Props) {
 	const removeParticipant = useMutation(api.tally.removeParticipant);
 	const [submitting, setSubmitting] = useState(false);
-	//   const { toast } = useToast();
 
 	const involvedExpenses = useMemo(() => {
 		const pId = String(participant.userId);
@@ -50,25 +48,19 @@ export default function DeleteParticipantModal({
 		try {
 			setSubmitting(true);
 			await removeParticipant({
-				tallyId: (tally as any)._id,
-				participantId: participant.userId as any,
+				tallyId: tally._id,
+				participantId: participant.userId,
 			});
-			//   toast({
-			//     title: "Participant removed",
-			//     description: `${participant.name} has been removed.`,
-			//     variant: "destructive"
-			//   });
+
+			toast.warning("Participant removed", {
+				description: `${participant.name} has been removed.`,
+			});
+
 			setOpen(false);
 		} catch (e) {
-			console.error("Failed to remove participant", e);
-			//   toast({
-			//     title: "Failed to remove participant",
-			//     description:
-			//       e instanceof Error
-			//         ? e.message
-			//         : "Please try again or check expenses.",
-			//     variant: "destructive"
-			//   });
+			toast.error("Failed to remove participant", {
+				description: e instanceof Error ? e.message : "Please try again.",
+			});
 		} finally {
 			setSubmitting(false);
 		}

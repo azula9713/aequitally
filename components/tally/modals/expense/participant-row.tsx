@@ -31,8 +31,9 @@ export function ParticipantRow({
 		onCustomAmountsChange: (value: number) => void;
 	}) {
 	return (
-		<div
-			className="flex min-w-0 items-center gap-2 px-3 py-2 text-sm hover:bg-accent/60 cursor-pointer transition-colors"
+		<button
+			type="button"
+			className="flex min-w-0 items-center gap-2 px-3 py-2 text-sm hover:bg-accent/60 cursor-pointer transition-colors w-full text-left"
 			onClick={onToggle}
 		>
 			<Checkbox
@@ -90,7 +91,7 @@ export function ParticipantRow({
 					)}
 				</div>
 			)}
-		</div>
+		</button>
 	);
 }
 

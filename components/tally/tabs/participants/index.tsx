@@ -22,12 +22,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { TabsContent } from "@/components/ui/tabs";
 import { api } from "@/convex/_generated/api";
-import { Doc } from "@/convex/_generated/dataModel";
 import {
 	getParticipantBalance,
 	getParticipantExpenses,
 } from "@/lib/helpers/tally.helper";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 type Props = {
 	tally: FunctionReturnType<typeof api.tally.getTally>;
@@ -47,7 +47,6 @@ export default function ParticipnatsTab({
 		userId: string;
 		name: string;
 	} | null>(null);
-	//   const { toast } = useToast();
 
 	const openDeleteParticipantForParticipant = (p: {
 		userId: string;
@@ -75,23 +74,21 @@ export default function ParticipnatsTab({
 			return;
 		}
 		try {
-			const nextParticipants = tally.participants.map((p: any) =>
+			const nextParticipants = tally.participants.map((p) =>
 				String(p.userId) === String(editingId) ? { ...p, name: nextName } : p,
 			);
 			await updateTally({
-				tallyId: (tally as any)._id,
+				tallyId: tally._id,
 				patchData: { participants: nextParticipants },
 			});
-			//   toast({
-			//     title: "Name updated",
-			//     description: "Participant name has been updated."
-			//   });
+
+			toast.success("Name updated", {
+				description: "Participant name has been updated.",
+			});
 		} catch (e) {
-			//   toast({
-			//     title: "Failed to update name",
-			//     description: e instanceof Error ? e.message : "Please try again.",
-			//     variant: "destructive"
-			//   });
+			toast.error("Failed to update name", {
+				description: e instanceof Error ? e.message : "Please try again.",
+			});
 		} finally {
 			cancelEditing();
 		}
@@ -251,7 +248,7 @@ export default function ParticipnatsTab({
 						setDeleteParticipantOpen(o);
 						if (!o) setSelectedParticipant(null);
 					}}
-					tally={tally as any}
+					tally={tally}
 					participant={selectedParticipant}
 				/>
 			)}

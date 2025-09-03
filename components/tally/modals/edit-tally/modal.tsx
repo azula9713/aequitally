@@ -1,7 +1,7 @@
 // import { useMutation } from "convex/react";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import { useState } from "react";
+import { useId, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -41,6 +41,11 @@ export default function EditTallyModal({
 	const [tallyDate, setTallyDate] = useState<Date | undefined>(undefined);
 	const [datePickerOpen, setDatePickerOpen] = useState(false);
 
+	const tallyNameId = useId();
+	const tallyDescriptionId = useId();
+	const tallyDateId = useId();
+	const tallyDatePickerId = useId();
+
 	const handleUpdateTally = (e: React.FormEvent) => {
 		e.preventDefault();
 	};
@@ -52,9 +57,9 @@ export default function EditTallyModal({
 				</DialogHeader>
 				<form onSubmit={handleUpdateTally} className="space-y-4">
 					<div className="space-y-2">
-						<Label htmlFor="tally-name">Tally Name</Label>
+						<Label htmlFor={tallyNameId}>Tally Name</Label>
 						<Input
-							id="tally-name"
+							id={tallyNameId}
 							placeholder="e.g., Trip to Italy"
 							value={tallyName}
 							onChange={(e) => setTallyName(e.target.value)}
@@ -63,9 +68,9 @@ export default function EditTallyModal({
 					</div>
 
 					<div className="space-y-2">
-						<Label htmlFor="tally-description">Description (optional)</Label>
+						<Label htmlFor={tallyDescriptionId}>Description (optional)</Label>
 						<Input
-							id="tally-description"
+							id={tallyDescriptionId}
 							placeholder="e.g., Amazing vacation with friends"
 							value={tallyDescription}
 							onChange={(e) => setTallyDescription(e.target.value)}
@@ -74,11 +79,11 @@ export default function EditTallyModal({
 
 					<div className="grid grid-cols-2 gap-x-2 gap-y-4">
 						<div className="space-y-2">
-							<Label htmlFor="tally-date">Date</Label>
+							<Label htmlFor={tallyDateId}>Date</Label>
 							<Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
 								<PopoverTrigger asChild>
 									<Button
-										id="tally-date"
+										id={tallyDateId}
 										variant="outline"
 										className={cn(
 											"w-full h-9 justify-start text-left font-normal bg-transparent hover:bg-accent hover:text-accent-foreground",
@@ -91,7 +96,7 @@ export default function EditTallyModal({
 								</PopoverTrigger>
 								<PopoverContent className="w-auto p-0">
 									<Calendar
-										id="tally-date-picker"
+										id={tallyDatePickerId}
 										mode="single"
 										selected={tallyDate}
 										onSelect={(selectedDate) => {

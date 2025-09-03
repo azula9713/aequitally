@@ -1,7 +1,6 @@
 import { Download, Edit, Plus, Receipt, Share2, Users } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import type { Doc } from "@/convex/_generated/dataModel";
-import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import EditTallyModal from "./modals/edit-tally/modal";
 
@@ -33,11 +32,9 @@ export default function TallyHeader({
 						</h1>
 						<div className="flex items-center gap-2">
 							{tally.date && (
-								<>
-									<span className="text-xs text-muted-foreground md:text-sm">
-										{new Date(tally.date).toLocaleDateString()}
-									</span>
-								</>
+								<span className="text-xs text-muted-foreground md:text-sm">
+									{new Date(tally.date).toLocaleDateString()}
+								</span>
 							)}
 						</div>
 					</div>

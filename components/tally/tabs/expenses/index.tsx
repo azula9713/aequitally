@@ -1,4 +1,3 @@
-import { useQuery } from "convex/react";
 import { Plus, Receipt } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
@@ -105,31 +104,31 @@ export default function ExpensesTab({
 		);
 	}, [tally.expenses, searchTerm, tally]);
 
-	const compareExpenses = (
-		a: Doc<"tallies">["expenses"][number],
-		b: Doc<"tallies">["expenses"][number],
-	) => {
-		let cmp = 0;
-		switch (sortBy) {
-			case "amount":
-				cmp = a.amount - b.amount;
-				break;
-			case "participants":
-				cmp = a.shareBetween.length - b.shareBetween.length;
-				break;
-			case "date":
-				cmp = (a.date || "").localeCompare(b.date || "");
-				break;
-			case "description":
-				cmp = (a.description || "").localeCompare(b.description || "");
-				break;
-			default:
-				cmp = 0;
-		}
-		return sortOrder === "asc" ? cmp : -cmp;
-	};
-
 	const groupedEntries = useMemo(() => {
+		const compareExpenses = (
+			a: Doc<"tallies">["expenses"][number],
+			b: Doc<"tallies">["expenses"][number],
+		) => {
+			let cmp = 0;
+			switch (sortBy) {
+				case "amount":
+					cmp = a.amount - b.amount;
+					break;
+				case "participants":
+					cmp = a.shareBetween.length - b.shareBetween.length;
+					break;
+				case "date":
+					cmp = (a.date || "").localeCompare(b.date || "");
+					break;
+				case "description":
+					cmp = (a.description || "").localeCompare(b.description || "");
+					break;
+				default:
+					cmp = 0;
+			}
+			return sortOrder === "asc" ? cmp : -cmp;
+		};
+
 		const list = filteredExpenses.slice().sort(compareExpenses);
 		if (groupBy === "none") {
 			return [["All expenses", list]] as [string, typeof list][];
@@ -144,7 +143,7 @@ export default function ExpensesTab({
 		}, {});
 		// Sort groups alphabetically; for date grouping, rely on Date parse from label as fallback
 		return Object.entries(map).sort(([a], [b]) => a.localeCompare(b));
-	}, [filteredExpenses, groupBy, sortBy, sortOrder, tally]);
+	}, [filteredExpenses, groupBy, tally, sortBy, sortOrder]);
 
 	return (
 		<TabsContent value="expenses" className="mt-4">

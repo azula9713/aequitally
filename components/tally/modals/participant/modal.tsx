@@ -1,7 +1,7 @@
 import { useMutation } from "convex/react";
 import { User } from "lucide-react";
+import { useId } from "react";
 import { v4 as uuidv4 } from "uuid";
-
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
@@ -27,6 +27,8 @@ export default function ParticipantModal({
 	setOpenAddParticipant,
 	tally,
 }: Props) {
+	const nameId = useId();
+
 	const addParticipant = useMutation(api.tally.addParticipant);
 	return (
 		<Dialog open={openAddParticipant} onOpenChange={setOpenAddParticipant}>
@@ -61,11 +63,11 @@ export default function ParticipantModal({
 					}}
 				>
 					<div className="grid gap-2">
-						<Label htmlFor="name">Name</Label>
+						<Label htmlFor={nameId}>Name</Label>
 						<div className="relative">
 							<User className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground size-4" />
 							<Input
-								id="name"
+								id={nameId}
 								name="name"
 								placeholder="e.g. Jamie Rivera"
 								className="pl-9"
