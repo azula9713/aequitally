@@ -31,15 +31,12 @@ export function ParticipantRow({
 		onCustomAmountsChange: (value: number) => void;
 	}) {
 	return (
-		<button
-			type="button"
-			className="flex min-w-0 items-center gap-2 px-3 py-2 text-sm hover:bg-accent/60 cursor-pointer transition-colors w-full text-left"
-			onClick={onToggle}
-		>
+		<div className="flex min-w-0 items-center gap-2 px-3 py-2 text-sm hover:bg-accent/60 transition-colors w-full text-left">
 			<Checkbox
 				checked={checked}
 				onCheckedChange={onToggle}
 				onClick={(e) => e.stopPropagation()}
+				className="cursor-pointer"
 			/>
 			<ParticipantAvatar participant={participant} className="h-6 w-6" />
 			<span className="font-medium flex-1 min-w-0 truncate">
@@ -91,7 +88,7 @@ export function ParticipantRow({
 					)}
 				</div>
 			)}
-		</button>
+		</div>
 	);
 }
 
