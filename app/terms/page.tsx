@@ -1,7 +1,47 @@
+import type { Metadata } from "next";
 import PageHeader from "@/components/common/page-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { termsSections } from "@/lib/data/terms-data";
+
+export const metadata: Metadata = {
+	title: "Terms of Service",
+	description:
+		"Read Aequitally's Terms of Service to understand your rights and responsibilities when using our expense sharing platform.",
+	keywords: [
+		"terms of service",
+		"user agreement",
+		"legal terms",
+		"service agreement",
+		"user responsibilities",
+		"platform terms",
+	],
+	openGraph: {
+		title: "Terms of Service - Aequitally",
+		description:
+			"Read Aequitally's Terms of Service to understand your rights and responsibilities when using our expense sharing platform.",
+		type: "website",
+		url: "https://aequitally.vercel.app/terms",
+		images: [
+			{
+				url: "/logo.png",
+				width: 1200,
+				height: 630,
+				alt: "Aequitally Terms of Service",
+			},
+		],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Terms of Service - Aequitally",
+		description:
+			"Read our Terms of Service to understand your rights and responsibilities.",
+		images: ["/logo.png"],
+	},
+	alternates: {
+		canonical: "/terms",
+	},
+};
 
 export default function Terms() {
 	return (

@@ -1,5 +1,6 @@
 "use client";
 
+import type { Metadata } from "next";
 import { useEffect, useState } from "react";
 import PageHeader from "@/components/common/page-header";
 import { Badge } from "@/components/ui/badge";
@@ -12,6 +13,45 @@ import {
 	loadCookiePreferences,
 	saveCookiePreferences,
 } from "@/lib/handlers/cookie-handler";
+
+export const metadata: Metadata = {
+	title: "Cookie Policy",
+	description:
+		"Learn about how Aequitally uses cookies and manage your cookie preferences. Control your privacy settings and understand our cookie policy.",
+	keywords: [
+		"cookie policy",
+		"cookie preferences",
+		"privacy settings",
+		"website cookies",
+		"tracking preferences",
+		"data collection",
+	],
+	openGraph: {
+		title: "Cookie Policy - Aequitally",
+		description:
+			"Learn about how Aequitally uses cookies and manage your cookie preferences to control your privacy settings.",
+		type: "website",
+		url: "https://aequitally.vercel.app/cookies",
+		images: [
+			{
+				url: "/logo.png",
+				width: 1200,
+				height: 630,
+				alt: "Aequitally Cookie Policy",
+			},
+		],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Cookie Policy - Aequitally",
+		description:
+			"Learn about our cookie policy and manage your privacy preferences.",
+		images: ["/logo.png"],
+	},
+	alternates: {
+		canonical: "/cookies",
+	},
+};
 
 export default function Cookies() {
 	const [essential, setEssential] = useState(true);

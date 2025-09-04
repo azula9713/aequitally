@@ -1,7 +1,47 @@
+import type { Metadata } from "next";
 import PageHeader from "@/components/common/page-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { privacySections } from "@/lib/data/privacy-data";
+
+export const metadata: Metadata = {
+	title: "Privacy Policy",
+	description:
+		"Aequitally's Privacy Policy explains how we collect, use, and protect your information. We prioritize your privacy and never sell your data.",
+	keywords: [
+		"privacy policy",
+		"data protection",
+		"user privacy",
+		"financial data security",
+		"expense tracking privacy",
+		"gdpr compliance",
+	],
+	openGraph: {
+		title: "Privacy Policy - Aequitally",
+		description:
+			"Learn how Aequitally protects your privacy and personal data. We prioritize user privacy and never sell your information.",
+		type: "website",
+		url: "https://aequitally.vercel.app/privacy",
+		images: [
+			{
+				url: "/logo.png",
+				width: 1200,
+				height: 630,
+				alt: "Aequitally Privacy Policy",
+			},
+		],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Privacy Policy - Aequitally",
+		description:
+			"Learn how Aequitally protects your privacy and personal data.",
+		images: ["/logo.png"],
+	},
+	alternates: {
+		canonical: "/privacy",
+	},
+};
 
 export default function Privacy() {
 	return (

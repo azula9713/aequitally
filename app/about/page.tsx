@@ -1,8 +1,48 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import PageHeader from "@/components/common/page-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+	title: "About",
+	description:
+		"Learn about Aequitally's mission to make expense sharing simple and stress-free. Built by a solo developer who believes in privacy-focused, user-friendly financial tools.",
+	keywords: [
+		"about aequitally",
+		"expense sharing story",
+		"developer story",
+		"financial privacy",
+		"simple expense tracking",
+		"independent software",
+	],
+	openGraph: {
+		title: "About Aequitally - The Story Behind Simple Expense Sharing",
+		description:
+			"Learn about Aequitally's mission to make expense sharing simple and stress-free. Built by a solo developer who believes in privacy-focused financial tools.",
+		type: "website",
+		url: "https://aequitally.vercel.app/about",
+		images: [
+			{
+				url: "/logo.png",
+				width: 1200,
+				height: 630,
+				alt: "About Aequitally - Expense Sharing App",
+			},
+		],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "About Aequitally - Simple Expense Sharing",
+		description:
+			"Learn about the story behind Aequitally and our mission to make expense sharing simple and stress-free.",
+		images: ["/logo.png"],
+	},
+	alternates: {
+		canonical: "/about",
+	},
+};
 
 export default function About() {
 	const values = [

@@ -15,11 +15,11 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { api } from "@/convex/_generated/api";
 import type { Id } from "@/convex/_generated/dataModel";
 
-export default function Viewtally({
-	params,
-}: {
+interface PageProps {
 	params: Promise<{ id: string }>;
-}) {
+}
+
+export default function Viewtally({ params }: PageProps) {
 	const { id } = params instanceof Promise ? use(params) : params;
 
 	const tally = useQuery(
