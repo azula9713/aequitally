@@ -1,4 +1,3 @@
-import { BadgeDollarSign, Coins } from "lucide-react";
 import { useCurrency } from "@/hooks/use-currency";
 import {
 	Select,
