@@ -92,7 +92,6 @@ export default function ExpenseModal({
 	});
 
 	const expenseDate = form.watch("date");
-	const expensePaidBy = form.watch("paidBy");
 
 	return (
 		<Dialog
@@ -166,35 +165,40 @@ export default function ExpenseModal({
 								/>
 							</div>
 							<div className="grid gap-3 md:gap-4 sm:grid-cols-2 min-w-0 items-start">
-								<div className="space-y-2 min-w-0">
-									<Label htmlFor="expense-payer">Who paid?</Label>
-									<Select
-										value={expensePaidBy}
-										onValueChange={(v) =>
-											form.setValue("paidBy", v, { shouldValidate: true })
-										}
-									>
-										<SelectTrigger className="min-h-10">
-											<SelectValue placeholder="Select who paid" />
-										</SelectTrigger>
-										<SelectContent>
-											{tally.participants.map((participant) => (
-												<SelectItem
-													key={participant.userId}
-													value={participant.userId}
-												>
-													<div className="flex items-center gap-2">
-														<ParticipantAvatar
-															participantName={participant.name}
-															className="h-5 w-5"
-														/>
-														{participant.name}
-													</div>
-												</SelectItem>
-											))}
-										</SelectContent>
-									</Select>
-								</div>
+								<FormField
+									control={form.control}
+									name="paidBy"
+									render={({ field }) => (
+										<FormItem>
+											<FormLabel>Who paid?</FormLabel>
+											<Select
+												value={field.value ?? ""}
+												onValueChange={field.onChange}
+											>
+												<SelectTrigger className="min-h-10">
+													<SelectValue placeholder="Select who paid" />
+												</SelectTrigger>
+												<SelectContent>
+													{tally.participants.map((participant) => (
+														<SelectItem
+															key={participant.userId}
+															value={participant.userId}
+														>
+															<div className="flex items-center gap-2">
+																<ParticipantAvatar
+																	participantName={participant.name}
+																	className="h-5 w-5"
+																/>
+																{participant.name}
+															</div>
+														</SelectItem>
+													))}
+												</SelectContent>
+											</Select>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
 								<div className="min-w-0 space-y-2">
 									<ParticipantSelector
 										participants={tally.participants}
@@ -258,7 +262,6 @@ export default function ExpenseModal({
 															});
 															setDatePickerOpen(false);
 														}}
-														initialFocus
 														className="w-auto"
 													/>
 												</PopoverContent>
