@@ -1,23 +1,23 @@
-import { ReactNode } from "react";
-
-import { ThemeProvider } from "./theme-provider";
+import type { ReactNode } from "react";
 import ConvexClientProvider from "./convex-client-provider";
+import { CurrencyProvider } from "./currency-provider";
+import { ThemeProvider } from "./theme-provider";
 
 type Props = {
-  children: ReactNode;
+	children: ReactNode;
 };
 
 export default function ProviderWrapper({ children }: Props) {
-  return (
-    <ConvexClientProvider>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        {children}
-      </ThemeProvider>
-    </ConvexClientProvider>
-  );
+	return (
+		<ConvexClientProvider>
+			<ThemeProvider
+				attribute="class"
+				defaultTheme="system"
+				enableSystem
+				disableTransitionOnChange
+			>
+				<CurrencyProvider>{children}</CurrencyProvider>
+			</ThemeProvider>
+		</ConvexClientProvider>
+	);
 }
