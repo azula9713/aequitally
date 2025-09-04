@@ -1,8 +1,9 @@
 // import { useMutation } from "convex/react";
+
+import { useMutation } from "convex/react";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useId, useState } from "react";
-
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -18,6 +19,7 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
+import { api } from "@/convex/_generated/api";
 import type { Doc } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
 
@@ -32,7 +34,7 @@ export default function EditTallyModal({
 	setEditTallyOpen,
 	tally,
 }: Props) {
-	//   const updateTally = useMutation(api.tally.updateTally);
+	const updateTally = useMutation(api.tally.updateTally);
 
 	const [tallyName, setTallyName] = useState(tally.name || "");
 	const [tallyDescription, setTallyDescription] = useState(
@@ -48,6 +50,16 @@ export default function EditTallyModal({
 
 	const handleUpdateTally = (e: React.FormEvent) => {
 		e.preventDefault();
+		updateTally({
+			tallyId: tally._id,
+			patchData: {
+				name: tallyName,
+				description: tallyDescription,
+				date: tallyDate?.toISOString(),
+			},
+		}).then(() => {
+			setEditTallyOpen(false);
+		});
 	};
 	return (
 		<Dialog open={editTallyOpen} onOpenChange={setEditTallyOpen}>
