@@ -48,13 +48,16 @@ export default function EditTallyModal({
 
 	const handleUpdateTally = (e: React.FormEvent) => {
 		e.preventDefault();
+		const patchData: Record<string, any> = {
+			name: tallyName,
+			description: tallyDescription,
+		};
+		if (tallyDate) {
+			patchData.date = tallyDate.toISOString();
+		}
 		updateTally({
 			tallyId: tally._id,
-			patchData: {
-				name: tallyName,
-				description: tallyDescription,
-				date: tallyDate?.toISOString(),
-			},
+			patchData,
 		}).then(() => {
 			setEditTallyOpen(false);
 		});
