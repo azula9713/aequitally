@@ -48,6 +48,7 @@ export default function EditTallyModal({
 
 	const handleUpdateTally = (e: React.FormEvent) => {
 		e.preventDefault();
+		// biome-ignore lint/suspicious/noExplicitAny: patchData needs flexible typing for dynamic property updates
 		const patchData: Record<string, any> = {
 			name: tallyName,
 			description: tallyDescription,

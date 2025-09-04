@@ -70,6 +70,7 @@ export default function CookieSettings() {
 
 		handleSaveSettings();
 	}, [essential, analytics, marketing, preferences]);
+
 	return (
 		<>
 			{cookieTypes.map((type) => (
