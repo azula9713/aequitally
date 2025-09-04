@@ -2,7 +2,6 @@
 
 import { useQuery } from "convex/react";
 import { Receipt, ReceiptText, Users } from "lucide-react";
-import Link from "next/link";
 import { use, useState } from "react";
 import ExpenseModal from "@/components/tally/modals/expense/modal";
 import ParticipantModal from "@/components/tally/modals/participant/modal";
@@ -10,7 +9,6 @@ import ExpensesTab from "@/components/tally/tabs/expenses";
 import ParticipnatsTab from "@/components/tally/tabs/participants";
 import SettlementsTab from "@/components/tally/tabs/settlements";
 import TallyHeader from "@/components/tally/tally-header";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { api } from "@/convex/_generated/api";
 import type { Id } from "@/convex/_generated/dataModel";
@@ -64,19 +62,6 @@ export default function Viewtally({ params }: PageProps) {
 		return (
 			<div className="min-h-screen bg-background flex items-center justify-center">
 				<div className="animate-spin border-2 border-accent border-t-transparent rounded-full size-8" />
-			</div>
-		);
-	}
-
-	if (!tally) {
-		return (
-			<div className="min-h-screen bg-background lex items-center justify-center">
-				<div className="text-center space-y-4">
-					<h1 className="text-2xl font-medium">Tally not found</h1>
-					<Button asChild variant="outline">
-						<Link href="/">Go back home</Link>
-					</Button>
-				</div>
 			</div>
 		);
 	}
