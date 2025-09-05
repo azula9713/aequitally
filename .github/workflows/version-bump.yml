@@ -20,16 +20,16 @@ jobs:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'pnpm'
-
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -45,13 +45,13 @@ jobs:
           # Get the base branch (main) package.json version
           git fetch origin main:main
           MAIN_VERSION=$(git show main:package.json | jq -r '.version')
-          
+
           # Get current PR branch package.json version
           PR_VERSION=$(jq -r '.version' package.json)
-          
+
           echo "Main version: $MAIN_VERSION"
           echo "PR version: $PR_VERSION"
-          
+
           if [ "$MAIN_VERSION" != "$PR_VERSION" ]; then
             echo "Manual version change detected: $MAIN_VERSION -> $PR_VERSION"
             echo "should_bump=false" >> $GITHUB_OUTPUT
@@ -61,7 +61,7 @@ jobs:
             echo "should_bump=true" >> $GITHUB_OUTPUT
             echo "manual_change=false" >> $GITHUB_OUTPUT
           fi
-          
+
           echo "main_version=$MAIN_VERSION" >> $GITHUB_OUTPUT
           echo "pr_version=$PR_VERSION" >> $GITHUB_OUTPUT
 
@@ -70,7 +70,7 @@ jobs:
         run: |
           echo "Auto-bumping version from ${{ steps.check-version.outputs.main_version }}"
           node scripts/bump-version.js
-          
+
           # Check if package.json was actually modified
           if git diff --quiet package.json; then
             echo "No version bump needed - package.json unchanged"
@@ -129,16 +129,16 @@ jobs:
               repo: context.repo.repo,
               issue_number: context.issue.number,
             });
-            
+
             const botComment = comments.find(comment => 
               comment.user.type === 'Bot' && 
               comment.body.includes('🚀 Version automatically bumped')
             );
-            
+
             const commentBody = `🚀 **Version automatically bumped** from \`${{ steps.check-version.outputs.main_version }}\` to \`${{ env.new_version }}\`
 
             This PR will deploy with the new version when merged to main. No additional deployment will be triggered.`;
-            
+
             if (botComment) {
               await github.rest.issues.updateComment({
                 owner: context.repo.owner,
@@ -164,18 +164,18 @@ jobs:
             const commentBody = `📝 **Manual version change detected** from \`${{ steps.check-version.outputs.main_version }}\` to \`${{ steps.check-version.outputs.pr_version }}\`
 
             Auto version bumping has been skipped for this PR.`;
-            
+
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
             });
-            
+
             const existingComment = comments.find(comment => 
               comment.user.type === 'Bot' && 
               comment.body.includes('📝 **Manual version change detected**')
             );
-            
+
             if (!existingComment) {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
