@@ -1,6 +1,6 @@
 {
 	"name": "aequitally",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"description": "A web application for managing shared expenses and settlements among participants with real-time synchronization",
 	"private": true,
 	"keywords": [
