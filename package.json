@@ -1,16 +1,58 @@
 {
 	"name": "aequitally",
-	"version": "0.1.0",
+	"version": "0.1.1",
+	"description": "A web application for managing shared expenses and settlements among participants with real-time synchronization",
 	"private": true,
+	"keywords": [
+		"expense-tracker",
+		"shared-expenses",
+		"settlement",
+		"split-bills",
+		"nextjs",
+		"react",
+		"convex",
+		"typescript"
+	],
+	"author": "Azula9713",
+	"license": "MIT",
+	"homepage": "https://aequitally.com",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/azula9713/aequitally.git"
+	},
+	"engines": {
+		"node": ">=18.0.0",
+		"pnpm": ">=8.0.0"
+	},
 	"scripts": {
 		"dev": "next dev --turbopack",
 		"build": "next build --turbopack",
 		"start": "next start",
+		"lint": "pnpm exec biome lint",
 		"lint:fix": "pnpm exec biome lint --write",
 		"format": "pnpm exec biome format --write",
 		"format:fix": "pnpm exec biome check --write",
+		"type-check": "pnpm exec tsc --noEmit",
+		"build:analyze": "ANALYZE=true next build --turbopack",
+		"convex:dev": "npx convex dev",
+		"convex:deploy": "npx convex deploy",
+		"version:bump": "node scripts/bump-version.js",
+		"version:check": "node scripts/check-version-changes.js",
+		"version:preview": "node scripts/preview-version-bump.js",
 		"prepare": "husky",
 		"pre-commit": "lint-staged"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^5.2.1",

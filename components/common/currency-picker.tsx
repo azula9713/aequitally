@@ -1,4 +1,3 @@
-import { Coins } from "lucide-react";
 import { useCurrency } from "@/hooks/use-currency";
 import {
 	Select,
@@ -17,14 +16,17 @@ export default function CurrencyPicker() {
 				key={currencyCode}
 				className="flex items-center justify-center space-x-2"
 			>
-				<Coins className="size-[1.2rem]" />
 				<Select value={currencyCode} onValueChange={updateCurrency}>
-					<SelectTrigger className="min-h-10">
+					<SelectTrigger className="min-h-10 cursor-pointer">
 						<SelectValue placeholder="Select the currency" />
 					</SelectTrigger>
 					<SelectContent>
 						{availableCurrencies.map((currency) => (
-							<SelectItem key={currency.code} value={currency.code}>
+							<SelectItem
+								key={currency.code}
+								value={currency.code}
+								className="cursor-pointer"
+							>
 								<div className="flex items-center gap-2">
 									{currency.symbol} {currency.code}
 								</div>

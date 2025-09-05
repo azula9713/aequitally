@@ -1,12 +1,5 @@
 import { format } from "date-fns";
-import {
-	CalendarIcon,
-	ChevronDown,
-	Loader2,
-	Minus,
-	Plus,
-	Users,
-} from "lucide-react";
+import { CalendarIcon, Loader2, Minus, Plus, Users } from "lucide-react";
 import { type FormEvent, useId, useState } from "react";
 
 import { cn } from "@/lib/utils";
@@ -43,16 +36,14 @@ export default function CreateForm({
 	isLoading,
 }: Props) {
 	const [datePickerOpen, setDatePickerOpen] = useState(false);
-	const [showOptional, setShowOptional] = useState(false);
 	const tallyNameId = useId();
 	const participantsId = useId();
 	const dateId = useId();
 	const datePickerId = useId();
 	const descriptionId = useId();
-	const optionalDetailsId = useId();
 
 	return (
-		<form onSubmit={submitHandler} className="space-y-5">
+		<form onSubmit={submitHandler} className="space-y-4">
 			<div className="space-y-2">
 				<Label htmlFor={tallyNameId} className="text-sm font-medium">
 					Tally Name *
@@ -66,154 +57,130 @@ export default function CreateForm({
 					required
 				/>
 			</div>
-			<div className="space-y-2">
-				<Label htmlFor={participantsId} className="text-sm font-medium">
-					Participants *
-				</Label>
-				<div className="flex items-center gap-2 rounded-md border border-border bg-background p-1">
-					<Button
-						type="button"
-						size="icon"
-						variant="ghost"
-						aria-label="Decrease participants"
-						className="h-9 w-9"
-						onClick={() => {
-							const raw = parseInt(numParticipants || "2", 10);
-							const next = Math.min(
-								20,
-								Math.max(2, (Number.isNaN(raw) ? 2 : raw) - 1),
-							);
-							setNumParticipants(String(next));
-						}}
-						disabled={parseInt(numParticipants || "2", 10) <= 2}
-					>
-						<Minus className="size-4" />
-					</Button>
-					<div
-						className="flex min-w-[140px] flex-1 items-center justify-center gap-2 px-2"
-						aria-live="polite"
-					>
-						<Users className="size-4 text-muted-foreground" />
-						<Input
-							id={participantsId}
-							type="text"
-							inputMode="numeric"
-							pattern="[0-9]*"
-							min={2}
-							max={20}
-							step={1}
-							value={numParticipants}
-							onChange={(e) => {
-								const val = e.target.value;
-								if (val === "") {
-									setNumParticipants("");
-								} else if (/^\d{1,2}$/.test(val)) {
-									setNumParticipants(val);
-								}
-							}}
-							onBlur={() => {
-								const n = parseInt(numParticipants || "0", 10);
-								const clamped = Math.min(
+			<div className="flex items-center justify-between space-x-2">
+				<div className="space-y-2 w-full ">
+					<Label htmlFor={participantsId} className="text-sm font-medium">
+						Participants *
+					</Label>
+					<div className="flex items-center gap-2 rounded-md border border-border bg-input/30">
+						<Button
+							type="button"
+							size="icon"
+							variant="ghost"
+							aria-label="Decrease participants"
+							className="h-9 w-9"
+							onClick={() => {
+								const raw = parseInt(numParticipants || "2", 10);
+								const next = Math.min(
 									20,
-									Math.max(2, Number.isNaN(n) ? 2 : n),
+									Math.max(2, (Number.isNaN(raw) ? 2 : raw) - 1),
 								);
-								setNumParticipants(String(clamped));
+								setNumParticipants(String(next));
 							}}
-							className="h-8 w-16 text-center font-semibold border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
-							aria-label="Number of participants"
-						/>
-					</div>
-					<Button
-						type="button"
-						size="icon"
-						variant="ghost"
-						aria-label="Increase participants"
-						className="h-9 w-9"
-						onClick={() => {
-							const raw = parseInt(numParticipants || "2", 10);
-							const next = Math.max(
-								2,
-								Math.min(20, (Number.isNaN(raw) ? 2 : raw) + 1),
-							);
-							setNumParticipants(String(next));
-						}}
-						disabled={parseInt(numParticipants || "2", 10) >= 20}
-					>
-						<Plus className="size-4" />
-					</Button>
-				</div>
-			</div>
-			<div>
-				<Button
-					type="button"
-					variant="ghost"
-					size="sm"
-					onClick={() => setShowOptional((v) => !v)}
-					className="h-8 px-2 -ml-1 text-muted-foreground"
-					aria-expanded={showOptional}
-					aria-controls={optionalDetailsId}
-				>
-					<ChevronDown
-						className={cn(
-							"size-4 mr-1 transition-transform",
-							showOptional ? "rotate-180" : "",
-						)}
-					/>
-					<span className="text-sm">Optional details</span>
-				</Button>
-				{showOptional && (
-					<div id={optionalDetailsId} className="mt-2 space-y-5">
-						<div className="grid md:grid-cols-2 gap-4">
-							<div className="space-y-2">
-								<Label htmlFor={dateId} className="text-sm font-medium">
-									Date
-								</Label>
-								<Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
-									<PopoverTrigger asChild>
-										<Button
-											id={dateId}
-											variant="outline"
-											className={cn(
-												"w-full h-9 justify-start text-left font-normal bg-transparent hover:bg-accent hover:text-accent-foreground",
-												!tallyDate && "text-muted-foreground",
-											)}
-										>
-											<CalendarIcon className="mr-2 size-4" />
-											{tallyDate ? format(tallyDate, "PPP") : "Select date"}
-										</Button>
-									</PopoverTrigger>
-									<PopoverContent className="w-auto p-0">
-										<Calendar
-											id={datePickerId}
-											mode="single"
-											selected={tallyDate}
-											onSelect={(selectedDate) => {
-												setTallyDate(selectedDate);
-												setDatePickerOpen(false);
-											}}
-											className="w-auto"
-										/>
-									</PopoverContent>
-								</Popover>
-							</div>
-						</div>
-
-						<div className="space-y-2">
-							<Label htmlFor={descriptionId} className="text-sm font-medium">
-								Description
-							</Label>
+							disabled={parseInt(numParticipants || "2", 10) <= 2}
+						>
+							<Minus className="size-4" />
+						</Button>
+						<div
+							className="flex min-w-[140px] flex-1 items-center justify-center gap-2 px-2"
+							aria-live="polite"
+						>
+							<Users className="size-4 text-muted-foreground" />
 							<Input
-								id={descriptionId}
-								placeholder="Add any additional details about this tally..."
-								value={description}
-								onChange={(e) => setDescription(e.target.value)}
-								className="h-9"
+								id={participantsId}
+								type="text"
+								inputMode="numeric"
+								pattern="[0-9]*"
+								min={2}
+								max={20}
+								step={1}
+								value={numParticipants}
+								onChange={(e) => {
+									const val = e.target.value;
+									if (val === "") {
+										setNumParticipants("");
+									} else if (/^\d{1,2}$/.test(val)) {
+										setNumParticipants(val);
+									}
+								}}
+								onBlur={() => {
+									const n = parseInt(numParticipants || "0", 10);
+									const clamped = Math.min(
+										20,
+										Math.max(2, Number.isNaN(n) ? 2 : n),
+									);
+									setNumParticipants(String(clamped));
+								}}
+								className="h-8 w-16 text-center font-semibold border-0 bg-input!"
+								aria-label="Number of participants"
 							/>
 						</div>
+						<Button
+							type="button"
+							size="icon"
+							variant="ghost"
+							aria-label="Increase participants"
+							className="h-9 w-9"
+							onClick={() => {
+								const raw = parseInt(numParticipants || "2", 10);
+								const next = Math.max(
+									2,
+									Math.min(20, (Number.isNaN(raw) ? 2 : raw) + 1),
+								);
+								setNumParticipants(String(next));
+							}}
+							disabled={parseInt(numParticipants || "2", 10) >= 20}
+						>
+							<Plus className="size-4" />
+						</Button>
 					</div>
-				)}
+				</div>
+				<div className="space-y-2 w-full">
+					<Label htmlFor={dateId} className="text-sm font-medium">
+						Date
+					</Label>
+					<Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
+						<PopoverTrigger asChild>
+							<Button
+								id={dateId}
+								variant="outline"
+								className={cn(
+									"w-full h-9 justify-start text-left font-normal bg-transparent hover:bg-accent hover:text-accent-foreground",
+									!tallyDate && "text-muted-foreground",
+								)}
+							>
+								<CalendarIcon className="mr-2 size-4" />
+								{tallyDate ? format(tallyDate, "PPP") : "Select date"}
+							</Button>
+						</PopoverTrigger>
+						<PopoverContent className="w-auto p-0">
+							<Calendar
+								id={datePickerId}
+								mode="single"
+								selected={tallyDate}
+								onSelect={(selectedDate) => {
+									setTallyDate(selectedDate);
+									setDatePickerOpen(false);
+								}}
+								className="w-auto"
+							/>
+						</PopoverContent>
+					</Popover>
+				</div>
 			</div>
 
+			<div className="space-y-2">
+				<Label htmlFor={descriptionId} className="text-sm font-medium">
+					Description
+				</Label>
+				<Input
+					id={descriptionId}
+					placeholder="Add any additional details about this tally..."
+					value={description}
+					onChange={(e) => setDescription(e.target.value)}
+					className="h-9"
+				/>
+			</div>
 			<div className="pt-3">
 				<Button
 					type="submit"

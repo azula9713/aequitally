@@ -40,7 +40,6 @@ export function CurrencyProvider({ children }: CurrencyProviderProps) {
 		defaultCurrencyPreferences.currencyCode,
 	);
 
-	// Load currency preferences on mount
 	useEffect(() => {
 		const preferences = loadCurrencyPreferences();
 		setCurrencyCode(preferences.currencyCode);
@@ -58,17 +57,14 @@ export function CurrencyProvider({ children }: CurrencyProviderProps) {
 		});
 	}, []);
 
-	// Create memoized currency formatter
 	const currencyFormatter = useMemo(() => {
 		return createCurrencyFormatter(currencyCode);
 	}, [currencyCode]);
 
-	// Get decimal places for current currency
 	const maximumFractionDigits = useMemo(() => {
 		return getDecimalPlaces(currencyCode);
 	}, [currencyCode]);
 
-	// Format currency function
 	const formatCurrency = useCallback(
 		(amount: number): string => {
 			return currencyFormatter.format(amount);
@@ -76,9 +72,7 @@ export function CurrencyProvider({ children }: CurrencyProviderProps) {
 		[currencyFormatter],
 	);
 
-	// Update currency function
 	const updateCurrency = useCallback((newCurrencyCode: string) => {
-		// Validate currency code exists in available currencies
 		const isValidCurrency = getAllCurrencies().some(
 			(c) => c.code === newCurrencyCode,
 		);
@@ -92,7 +86,6 @@ export function CurrencyProvider({ children }: CurrencyProviderProps) {
 
 		setCurrencyCode(newCurrencyCode);
 
-		// Save to localStorage
 		const preferences: CurrencyPreferences = {
 			currencyCode: newCurrencyCode,
 		};
