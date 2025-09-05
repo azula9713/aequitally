@@ -36,6 +36,9 @@
 		"build:analyze": "ANALYZE=true next build --turbopack",
 		"convex:dev": "npx convex dev",
 		"convex:deploy": "npx convex deploy",
+		"version:bump": "node scripts/bump-version.js",
+		"version:check": "node scripts/check-version-changes.js",
+		"version:preview": "node scripts/preview-version-bump.js",
 		"prepare": "husky",
 		"pre-commit": "lint-staged"
 	},
