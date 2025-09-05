@@ -155,7 +155,7 @@ export function AdvancedSplitOptions({
 												<Icon className="size-5" />
 												<span>{label}</span>
 												{active && (
-													<span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-primary" />
+													<span className="absolute top-1 right-1 rounded-full bg-primary size-2" />
 												)}
 											</Button>
 										</TooltipTrigger>

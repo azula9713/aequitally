@@ -167,7 +167,7 @@ export default function About() {
 											rel="noopener noreferrer"
 											aria-label="View Aequitally source code on GitHub"
 										>
-											<Github className="mr-2 h-4 w-4" />
+											<Github className="mr-2 size-4" />
 											View on GitHub
 										</Link>
 									</Button>
@@ -178,7 +178,7 @@ export default function About() {
 											rel="noopener noreferrer"
 											aria-label="Visit developer's portfolio website"
 										>
-											<ExternalLink className="mr-2 h-4 w-4" />
+											<ExternalLink className="mr-2 size-4" />
 											Visit Portfolio
 										</Link>
 									</Button>

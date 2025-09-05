@@ -105,13 +105,13 @@ export function ParticipantSelector({
 									>
 										<ParticipantAvatar
 											participantName={p.name}
-											className="h-7 w-7 shadow-sm"
+											className="shadow-sm size-7"
 										/>
 									</div>
 								))}
 							{selectedParticipants.length > 5 && (
 								<div
-									className="h-7 w-7 rounded-full bg-muted text-xs flex items-center justify-center ring-2 ring-background font-medium"
+									className="rounded-full bg-muted text-xs flex items-center justify-center ring-2 ring-background font-medium size-7"
 									title={`${selectedParticipants.length - 5} more`}
 								>
 									+{selectedParticipants.length - 5}

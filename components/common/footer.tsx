@@ -50,7 +50,7 @@ export default function Footer() {
 								className="hover:text-foreground transition-colors"
 								aria-label="View source code on GitHub"
 							>
-								<Github className="h-4 w-4" />
+								<Github className="size-4" />
 							</Link>
 							<Link
 								href="https://azula9713.dev"
@@ -59,7 +59,7 @@ export default function Footer() {
 								className="hover:text-foreground transition-colors"
 								aria-label="Visit developer's portfolio website"
 							>
-								<ExternalLink className="h-4 w-4" />
+								<ExternalLink className="size-4" />
 							</Link>
 						</div>
 					</div>
