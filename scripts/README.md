@@ -153,7 +153,7 @@ pnpm version:check
 node scripts/bump-version.js --dry-run
 
 # Apply version bump locally (for testing)
-pnmp version:bump
+pnpm version:bump
 ```
 
 ## Troubleshooting
