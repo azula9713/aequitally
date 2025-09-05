@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-
 import PageHeader from "@/components/common/page-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -103,7 +103,7 @@ export default function About() {
 							</p>
 						</div>
 
-						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+						<div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full">
 							{values.map((value) => (
 								<Card key={value.title}>
 									<CardContent className="space-y-2">
@@ -135,19 +135,23 @@ export default function About() {
 					<Card>
 						<CardContent className="text-center">
 							<div className="bg-accent/20 rounded-full mx-auto flex items-center justify-center size-24">
-								<span className="text-primary text-2xl font-semibold">
+								{/* <span className="text-primary text-2xl font-semibold">
 									👨‍💻
-								</span>
+								</span> */}
+								<Image
+									src="/user.jpg"
+									alt="Developer Avatar"
+									width={96}
+									height={96}
+									className="rounded-full"
+								/>
 							</div>
 							<div className="space-y-4">
-								<h3 className="text-2xl font-medium">Solo Developer</h3>
-								<p className="text-primary">Full-Stack Engineer & Designer</p>
+								<h3 className="text-2xl font-medium">Azula9713</h3>
+								<p className="text-primary">Not your average developer</p>
 								<p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto">
-									I`&apos;`m a software engineer who believes in building tools
-									that solve real problems. When I`&apos;`m not coding
-									Aequitally, you`&apos;`ll find me trying new restaurants (and
-									sharing the bill with friends), hiking, or working on other
-									side projects.
+									I&apos;m a software engineer who believes in building tools
+									that solve real problems.
 								</p>
 								<p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto">
 									Aequitally is bootstrapped and independent - no investors, no

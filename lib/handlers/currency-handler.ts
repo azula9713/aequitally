@@ -48,23 +48,15 @@ export const clearCurrencyPreferences = (): void => {
 	}
 };
 
-/**
- * Create a currency formatter using native decimal detection
- */
 export const createCurrencyFormatter = (
 	currencyCode: string,
 ): Intl.NumberFormat => {
 	return new Intl.NumberFormat(undefined, {
 		style: "currency",
 		currency: currencyCode,
-		// Let Intl.NumberFormat automatically determine the decimal places
-		// No need to manually set maximumFractionDigits
 	});
 };
 
-/**
- * Get decimal places for a currency using formatToParts
- */
 export const getDecimalPlaces = (currencyCode: string): number => {
 	try {
 		const formatter = new Intl.NumberFormat(undefined, {
@@ -77,7 +69,7 @@ export const getDecimalPlaces = (currencyCode: string): number => {
 		const fractionPart = parts.find((part) => part.type === "fraction");
 
 		return fractionPart?.value.length ?? 0;
-	} catch (error) {
+	} catch (_error) {
 		// Fallback to 2 decimal places for invalid currency codes
 		console.warn(
 			`Invalid currency code: ${currencyCode}, using 2 decimal places`,
