@@ -216,7 +216,7 @@ export default function ParticipnatsTab({
 														openAddExpenseForParticipant(participant.userId)
 													}
 												>
-													<Plus className="mr-2 h-4 w-4" />
+													<Plus className="mr-2 size-4" />
 													Add expense
 												</DropdownMenuItem>
 												<DropdownMenuItem
@@ -225,7 +225,7 @@ export default function ParticipnatsTab({
 														openDeleteParticipantForParticipant(participant)
 													}
 												>
-													<Trash2 className="mr-2 h-4 w-4" />
+													<Trash2 className="mr-2 size-4" />
 													Remove participant
 												</DropdownMenuItem>
 											</DropdownMenuContent>

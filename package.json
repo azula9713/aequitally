@@ -1,6 +1,6 @@
 {
 	"name": "aequitally",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "A web application for managing shared expenses and settlements among participants with real-time synchronization",
 	"private": true,
 	"keywords": [
@@ -34,8 +34,8 @@
 		"format:fix": "pnpm exec biome check --write",
 		"type-check": "pnpm exec tsc --noEmit",
 		"build:analyze": "ANALYZE=true next build --turbopack",
-		"convex:dev": "npx convex dev",
-		"convex:deploy": "npx convex deploy",
+		"convex:dev": "pnpm dlx convex dev",
+		"convex:deploy": "pnpm dlx convex deploy",
 		"version:bump": "node scripts/bump-version.js",
 		"version:check": "node scripts/check-version-changes.js",
 		"version:preview": "node scripts/preview-version-bump.js",

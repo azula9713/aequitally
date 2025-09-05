@@ -68,7 +68,7 @@ export default function CreateForm({
 							size="icon"
 							variant="ghost"
 							aria-label="Decrease participants"
-							className="h-9 w-9"
+							className="size-9"
 							onClick={() => {
 								const raw = parseInt(numParticipants || "2", 10);
 								const next = Math.min(
@@ -120,7 +120,7 @@ export default function CreateForm({
 							size="icon"
 							variant="ghost"
 							aria-label="Increase participants"
-							className="h-9 w-9"
+							className="size-9"
 							onClick={() => {
 								const raw = parseInt(numParticipants || "2", 10);
 								const next = Math.max(

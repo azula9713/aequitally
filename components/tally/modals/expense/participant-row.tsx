@@ -40,7 +40,7 @@ export function ParticipantRow({
 			/>
 			<ParticipantAvatar
 				participantName={participant.name}
-				className="h-6 w-6"
+				className="size-6"
 			/>
 			<span className="font-medium flex-1 min-w-0 truncate">
 				{participant.name}
