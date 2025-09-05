@@ -1,3 +1,4 @@
+import { ExternalLink, Github } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -158,6 +159,30 @@ export default function About() {
 									pressure to add unnecessary features or raise prices. Just a
 									simple tool that works.
 								</p>
+								<div className="flex flex-col sm:flex-row gap-3 justify-center items-center pt-4">
+									<Button asChild variant="default" className="min-w-[180px]">
+										<Link
+											href="https://github.com/azula9713/aequitally"
+											target="_blank"
+											rel="noopener noreferrer"
+											aria-label="View Aequitally source code on GitHub"
+										>
+											<Github className="mr-2 h-4 w-4" />
+											View on GitHub
+										</Link>
+									</Button>
+									<Button asChild variant="outline" className="min-w-[180px]">
+										<Link
+											href="https://azula9713.dev"
+											target="_blank"
+											rel="noopener noreferrer"
+											aria-label="Visit developer's portfolio website"
+										>
+											<ExternalLink className="mr-2 h-4 w-4" />
+											Visit Portfolio
+										</Link>
+									</Button>
+								</div>
 							</div>
 						</CardContent>
 					</Card>
